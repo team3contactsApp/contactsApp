@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">team3_contactsApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">email을 설정해주세요</string>
     <string name="activitycount">활동 횟수</string>
