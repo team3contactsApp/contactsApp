@@ -12,4 +12,7 @@
     <string name="seedName">씨앗 활동가</string>
     <string name="support">Support Earth</string>
     <string name="telable">연락 가능한 번호</string>
+    <string name="title_home">내 연락처</string>
+    <string name="title_dashboard">모임</string>
+    <string name="title_notifications">마이페이지</string>
 </resources>
