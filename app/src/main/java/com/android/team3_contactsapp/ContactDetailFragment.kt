@@ -1,5 +1,7 @@
 package com.android.team3_contactsapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.telecom.Call
 import androidx.fragment.app.Fragment
@@ -7,24 +9,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.android.team3_contactsapp.databinding.FragmentContactDetailBinding
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_NAME = "name"
+private const val ARG_PHONE_NUMBER = "phone_number"
+private const val ARG_MEMBER_IMG = "member_img"
 
 class ContactDetailFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
+    private var name: String? = null
+    private var myPhoneNumber: String? = null
+    private var memberImg: Int = 0
     private var _binding : FragmentContactDetailBinding? = null
     private val binding get() = _binding
-
-    private val fixedPhoneNumber = "01012345678"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            name = it.getString(ARG_NAME)
+            myPhoneNumber = it.getString(ARG_PHONE_NUMBER)
+            memberImg = it.getInt(ARG_MEMBER_IMG)
         }
     }
 
@@ -39,23 +43,27 @@ class ContactDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.tvCtDetailName?.text = "홍길동"
+        binding?.tvCtDetailName?.text = name
 
         binding?.btnMessage?.setOnClickListener {
-            sendMessage(fixedPhoneNumber)
+            sendMessage(myPhoneNumber ?: "")
         }
+        val memberImgPicture = ContextCompat.getDrawable(requireContext(), memberImg)
+        binding?.ivCtDetailMyPicture?.setImageDrawable(memberImgPicture)
 
         binding?.btnCall?.setOnClickListener {
-            sendCall(fixedPhoneNumber)
+            sendCall(myPhoneNumber ?: "")
         }
     }
 
     private fun sendMessage(phoneNumber: String) {
-        Toast.makeText(requireContext(), "메세지 전송 중: $phoneNumber", Toast.LENGTH_SHORT).show()
+        val message = "안녕하세요, {$phoneNumber}님에게 메세지를 전송합니다. "
+        println("메세지 전송: $message")
     }
 
     private fun sendCall(phoneNumber: String) {
-        Toast.makeText(requireContext(), "전화 걸기 중: $phoneNumber", Toast.LENGTH_SHORT).show()
+        val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
+        startActivity(dialIntent)
     }
 
     override fun onDestroy() {
@@ -65,11 +73,12 @@ class ContactDetailFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(name: String, phoneNumber: String, memberIma: Int) =
             ContactDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_NAME, name)
+                    putString(ARG_PHONE_NUMBER, phoneNumber)
+                    putInt(ARG_MEMBER_IMG, memberIma)
                 }
             }
     }
