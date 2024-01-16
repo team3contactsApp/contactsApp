@@ -1,10 +1,10 @@
 package com.android.team3_contactsapp
 
+
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.team3_contactsapp.databinding.FragmentMyContactsBinding
 import com.android.team3_contactsapp.databinding.RecyclerviewItemJoinedgroupBinding
 import kotlinx.parcelize.Parcelize
 
