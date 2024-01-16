@@ -8,8 +8,11 @@ import com.android.team3_contactsapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.viewpager2.widget.ViewPager2
 import com.android.team3_contactsapp.databinding.FragmentMyContactsBinding
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -25,36 +28,40 @@ class MainActivity : AppCompatActivity() {
 //
 //        navView.setupWithNavController(navController)
 
-        val adapter = FragmentPageAdapter(supportFragmentManager, lifecycle)
+        initViewPager()
 
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when(tab?.position) {
-                    0 -> setFragment(MyContactsFragment())
-                    1 -> setFragment(GroupFragment())
-                    2 -> setFragment(ContactDetailFragment())
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
-
-        })
-
-        setFragment(MyContactsFragment())
     }
 
+    private fun initViewPager() {
+        val viewPagerAdapter = ViewPagerAdapter(this)
+        viewPagerAdapter.addFragment(MyContactsFragment())
+        viewPagerAdapter.addFragment(GroupFragment())
+        viewPagerAdapter.addFragment(ContactDetailFragment())
 
-    private fun setFragment(frag: Fragment) {
-        supportFragmentManager.commit {
-            replace(R.id.frame_layout, frag)
-            setReorderingAllowed(true)
-            addToBackStack("")
+        binding.viewpager.apply {
+            adapter = viewPagerAdapter
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                }
+            })
         }
+
+        TabLayoutMediator(binding.tabLayout, binding.viewpager) { tab, position ->
+            when(position) {
+                0 -> {
+                    tab.setText(R.string.title_home)
+                    tab.setIcon(R.drawable.phonecall)
+                }
+                1 -> {
+                    tab.setText(R.string.title_dashboard)
+                    tab.setIcon(R.drawable.group)
+                }
+                2 -> {
+                    tab.setText(R.string.title_notifications)
+                    tab.setIcon(R.drawable.info)
+                }
+            }
+        }.attach()
     }
 }
