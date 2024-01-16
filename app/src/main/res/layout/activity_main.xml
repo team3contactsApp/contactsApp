@@ -20,6 +20,9 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        app:tabIconTint="@color/main_tab_color_selector"
+        app:tabTextColor="@color/main_tab_color_selector"
+        app:tabIndicatorColor="#38CE28"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -27,17 +30,20 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:icon="@color/black"/>
+            android:text="내 연락처"
+            android:icon="@drawable/phonecall"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:icon="@color/black"/>
+            android:text="모임그룹"
+            android:icon="@drawable/group"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:icon="@color/black"/>
+            android:text="마이페이지"
+            android:icon="@drawable/info"/>
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
