@@ -30,6 +30,7 @@ class ContactDetailFragment : Fragment() {
     ): View? {
         _binding = FragmentContactDetailBinding.inflate(inflater, container,false)
         return binding?.root
+        
     }
 
     override fun onDestroy() {
