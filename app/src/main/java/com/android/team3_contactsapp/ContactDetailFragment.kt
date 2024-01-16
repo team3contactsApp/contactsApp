@@ -48,7 +48,6 @@ class ContactDetailFragment : Fragment() {
         binding?.btnCall?.setOnClickListener {
             sendCall(fixedPhoneNumber)
         }
-
     }
 
     private fun sendMessage(phoneNumber: String) {
@@ -58,7 +57,6 @@ class ContactDetailFragment : Fragment() {
     private fun sendCall(phoneNumber: String) {
         Toast.makeText(requireContext(), "전화 걸기 중: $phoneNumber", Toast.LENGTH_SHORT).show()
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
