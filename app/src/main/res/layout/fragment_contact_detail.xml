@@ -266,7 +266,7 @@
 
 
                 <TextView
-                    android:id="@+id/tv_ctDetail_partytext2"
+                    android:id="@+id/tv_ctDetail_partyText2"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -274,10 +274,10 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@+id/iv_ctDetail_partyPic3"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_partyname2" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_partyName2" />
 
                 <TextView
-                    android:id="@+id/tv_ctDetail_partyname2"
+                    android:id="@+id/tv_ctDetail_partyName2"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -289,7 +289,7 @@
                     app:layout_constraintTop_toTopOf="@+id/iv_ctDetail_partyPic3" />
 
                 <TextView
-                    android:id="@+id/tv_ctDetail_partytext1"
+                    android:id="@+id/tv_ctDetail_partyText1"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -297,10 +297,10 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@+id/iv_ctDetail_partyPic2"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_partyname1" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_partyName1" />
 
                 <TextView
-                    android:id="@+id/tv_ctDetail_partyname1"
+                    android:id="@+id/tv_ctDetail_partyName1"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -355,7 +355,7 @@
                     tools:src="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/tv_ctDetail_partyname"
+                    android:id="@+id/tv_ctDetail_partyName"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -367,7 +367,7 @@
                     app:layout_constraintTop_toTopOf="@+id/iv_ctDetail_partyPic" />
 
                 <TextView
-                    android:id="@+id/tv_ctDetail_partytext"
+                    android:id="@+id/tv_ctDetail_partyText"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -376,14 +376,15 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@+id/iv_ctDetail_partyPic"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_partyname" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_partyName" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                <ImageView
                     android:id="@+id/btn_floating"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="20dp"
+                    android:src=""
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
