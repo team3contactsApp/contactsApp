@@ -1,10 +1,12 @@
 package com.android.team3_contactsapp
 
 import android.os.Bundle
+import android.telecom.Call
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.android.team3_contactsapp.databinding.FragmentContactDetailBinding
 
 private const val ARG_PARAM1 = "param1"
@@ -15,6 +17,8 @@ class ContactDetailFragment : Fragment() {
     private var param2: String? = null
     private var _binding : FragmentContactDetailBinding? = null
     private val binding get() = _binding
+
+    private val fixedPhoneNumber = "01012345678"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +34,28 @@ class ContactDetailFragment : Fragment() {
     ): View? {
         _binding = FragmentContactDetailBinding.inflate(inflater, container,false)
         return binding?.root
-        
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding?.tvCtDetailName?.text = "홍길동"
+
+        binding?.btnMessage?.setOnClickListener {
+            sendMessage(fixedPhoneNumber)
+        }
+
+        binding?.btnCall?.setOnClickListener {
+            sendCall(fixedPhoneNumber)
+        }
+    }
+
+    private fun sendMessage(phoneNumber: String) {
+        Toast.makeText(requireContext(), "메세지 전송 중: $phoneNumber", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun sendCall(phoneNumber: String) {
+        Toast.makeText(requireContext(), "전화 걸기 중: $phoneNumber", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {
