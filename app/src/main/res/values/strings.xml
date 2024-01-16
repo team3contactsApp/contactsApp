@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">team3_contactsApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">email을 설정해주세요</string>
+    <string name="activitycount">활동 횟수</string>
+    <string name="seedProtector">씨앗 활동가</string>
+    <string name="doingActivity">활동 중인 모임</string>
+    <string name="seedtemp">당신의 새싹 온도를 확인하세요</string>
+    <string name="bokbear">북극곰</string>
+    <string name="scrolltitel">나의 새싹 온도는??</string>
+    <string name="seedName">씨앗 활동가</string>
+    <string name="support">Support Earth</string>
+    <string name="telable">연락 가능한 번호</string>
 </resources>
