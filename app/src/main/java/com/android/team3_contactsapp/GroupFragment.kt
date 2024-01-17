@@ -1,10 +1,12 @@
 package com.android.team3_contactsapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.android.team3_contactsapp.databinding.ActivityGroupDetailBinding
 import com.android.team3_contactsapp.databinding.ActivityMainBinding
 import com.android.team3_contactsapp.databinding.FragmentGroupBinding
 import com.android.team3_contactsapp.group_recycler.GroupRecyclerAdapter1
@@ -37,8 +39,18 @@ class GroupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val groupAdapter = GroupRecyclerAdapter1(Data.group)
 
-        binding.recyclerView1.adapter = GroupRecyclerAdapter1(Data.group)
+        binding.recyclerView1.adapter = groupAdapter
+
+        //val intent = Intent(this, ActivityGroupDetailBinding::class.java)
+
+        groupAdapter.itemClick = object : GroupRecyclerAdapter1.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                //startActivity()
+            }
+
+        }
     }
 
     companion object {

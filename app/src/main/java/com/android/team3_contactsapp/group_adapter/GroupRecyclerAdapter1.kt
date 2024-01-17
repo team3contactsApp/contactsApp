@@ -15,7 +15,15 @@ import com.android.team3_contactsapp.group_adapter.GroupRecyclerAdapter2
 class GroupRecyclerAdapter1(private val dataList: MutableList<Group>) :
     RecyclerView.Adapter<GroupRecyclerAdapter1.Holder>() {
 
+    interface ItemClick {
+        fun onClick(view: View, position: Int)
+    }
+
+    var itemClick : ItemClick? = null
+
     inner class Holder(private val binding: RecyclerviewItemGroupBinding) : RecyclerView.ViewHolder(binding.root) {
+
+
 
         fun bind(data : Group) {
             binding.ivGroupImg.setImageResource(data.groupImg)
@@ -36,6 +44,9 @@ class GroupRecyclerAdapter1(private val dataList: MutableList<Group>) :
     override fun getItemCount() = dataList.size
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
+        holder.itemView.setOnClickListener {
+            itemClick?.onClick(it, position)
+        }
         dataList[position].run { holder.bind(this) }
     }
 }
