@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/ctDetail_constactName"
+            android:id="@+id/ctDetail_contactName"
             android:layout_width="200dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="@+id/iv_back" />
 
         <ImageView
-            android:id="@+id/iv_ctDeatil_setting"
+            android:id="@+id/iv_ctDetail_setting"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="8dp"
