@@ -1,6 +1,7 @@
 package com.android.team3_contactsapp
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.team3_contactsapp.databinding.MypageRecyclerBinding
@@ -9,12 +10,23 @@ import com.android.team3_contactsapp.databinding.RecyclerviewItemContactBinding
 class MyPageAdapter (val myItems : MutableList<MyJoinedGroup>): RecyclerView.Adapter<MyPageAdapter.Holder>() {
 
 
+    interface ItemClick{
+        fun onClick(view: View, position: Int)
+    }
+    var itemClick : ItemClick? = null
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPageAdapter.Holder {
         val binding = MypageRecyclerBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return Holder(binding)
     }
 
     override fun onBindViewHolder(holder: Holder ,position: Int) {
+
+        holder.itemView.setOnClickListener {  //클릭이벤트추가부분
+            itemClick?.onClick(it, position)
+        }
+
         holder.mpImage.setImageResource(myItems[position].img)
         holder.mpName.text = myItems[position].name
     }

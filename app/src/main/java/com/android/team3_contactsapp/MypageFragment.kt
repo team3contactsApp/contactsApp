@@ -43,6 +43,9 @@ class MypageFragment : Fragment() {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        //클릭 이벤트 처리
+        binding.
+
         //마이페이지 리사이클러뷰
         val MyPageAdapter = MyPageAdapter(Data.myJoinedgroup)
         binding.mypageRecyclerView.adapter = MyPageAdapter
