@@ -8,17 +8,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
-import com.android.team3_contactsapp.databinding.RecyclerviewItemContactDetailJoinedgroupBinding
-import kotlin.RuntimeException
 
 class ContactDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContactDetailBinding
     private var member: Member? = null
-    private val groupList: MutableList<Group> = mutableListOf()
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
