@@ -24,7 +24,9 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
    <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/rv_groupDetail"
+       android:id="@+id/recycler_view2"
+       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+       android:orientation="horizontal"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"/>
 
