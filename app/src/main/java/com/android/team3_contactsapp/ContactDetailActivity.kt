@@ -2,10 +2,8 @@ package com.android.team3_contactsapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.ImageView
 import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
-import com.android.team3_contactsapp.databinding.ActivityMainBinding
 
 class ContactDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContactDetailBinding
