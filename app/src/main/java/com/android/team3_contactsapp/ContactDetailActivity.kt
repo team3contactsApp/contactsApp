@@ -71,25 +71,12 @@ class ContactDetailActivity : AppCompatActivity(), FragmentDataListener {
         if (index < groupIds.size) {
             val groupId = groupIds[index]
             val group = findGroupById(groupId)
+
             if (group != null) {
-                val groupNameId = when (index) {
-                    0 -> R.id.tv_ctDetail_groupName
-                    1 -> R.id.tv_ctDetail_groupName1
-                    2 -> R.id.tv_ctDetail_groupName2
-                    else -> throw RuntimeException()
-                }
-
-                val groupDescId = when (index) {
-                    0 -> R.id.tv_ctDetail_groupDesc
-                    1 -> R.id.tv_ctDetail_groupDesc1
-                    2 -> R.id.tv_ctDetail_groupDesc2
-                    else -> throw RuntimeException()
-                }
-
-                val groupPicId = when (index) {
-                    0 -> R.id.iv_ctDetail_groupPic
-                    1 -> R.id.iv_ctDetail_groupPic1
-                    2 -> R.id.iv_ctDetail_groupPic2
+                val (groupNameId, groupDescId, groupPicId) = when (index) {
+                    0 -> Triple(R.id.tv_ctDetail_groupName, R.id.tv_ctDetail_groupDesc, R.id.iv_ctDetail_groupPic)
+                    1 -> Triple(R.id.tv_ctDetail_groupName1, R.id.tv_ctDetail_groupDesc1, R.id.iv_ctDetail_groupPic1)
+                    2 -> Triple(R.id.tv_ctDetail_groupName2, R.id.tv_ctDetail_groupDesc2, R.id.iv_ctDetail_groupPic2)
                     else -> throw RuntimeException()
                 }
 
