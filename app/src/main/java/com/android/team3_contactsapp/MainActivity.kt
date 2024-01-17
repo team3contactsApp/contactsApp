@@ -1,9 +1,7 @@
 package com.android.team3_contactsapp
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.android.team3_contactsapp.databinding.ActivityMainBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -13,7 +11,7 @@ import com.android.team3_contactsapp.databinding.FragmentMyContactsBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainActivity : AppCompatActivity(),FragmentDataListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,12 +61,5 @@ class MainActivity : AppCompatActivity(),FragmentDataListener {
                 }
             }
         }.attach()
-    }
-
-    override fun onDataReceived(data: Member) {
-        val intent = Intent(this,ContactDetailActivity::class.java)
-        intent.putExtra("data",data)
-        startActivity(intent)
-        Log.d("test","여기 거처가는거냐? ${data}, ${intent}")
     }
 }

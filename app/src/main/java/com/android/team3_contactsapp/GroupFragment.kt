@@ -18,7 +18,7 @@ class GroupFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var intent: Intent
+    //private lateinit var intent: Intent
     private lateinit var binding: FragmentGroupBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,17 +35,8 @@ class GroupFragment : Fragment() {
     ): View? {
         //return inflater.inflate(R.layout.fragment_group, container, false)
         binding = FragmentGroupBinding.inflate(inflater)
-        intent = Intent(requireActivity(), ActivityGroupDetailBinding::class.java)
 
-        val groupAdapter = GroupRecyclerAdapter1(Data.group)
-        binding.recyclerView1.adapter = groupAdapter
 
-        groupAdapter.itemClick = object : GroupRecyclerAdapter1.ItemClick {
-            override fun onClick(view: View, position: Int) {
-                startActivity(intent)
-            }
-
-        }
 
         return binding.root
     }
@@ -53,9 +44,14 @@ class GroupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val groupAdapter = GroupRecyclerAdapter1(Data.group)
+        binding.recyclerView1.adapter = groupAdapter
 
+        groupAdapter.itemClick = object : GroupRecyclerAdapter1.ItemClick {
+            override fun onClick(view: View, position: Int) {
 
-
+            }
+        }
     }
 
     companion object {
