@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private fun initViewPager() {
         val viewPagerAdapter = ViewPagerAdapter(this)
         viewPagerAdapter.addFragment(MyContactsFragment())
-        viewPagerAdapter.addFragment(GroupFragment())
+        viewPagerAdapter.addFragment(GroupDetailFragment())
         viewPagerAdapter.addFragment(MypageFragment())
 
         binding.viewpager.apply {
