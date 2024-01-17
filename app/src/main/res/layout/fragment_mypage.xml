@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MypageFragment">
+    tools:context=".MypageFragment"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mypage_toptap"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#009688"
+        android:background="#AEF8A7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
@@ -20,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:text="마이페이지"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,11 +45,11 @@
         android:id="@+id/middle"
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:background="@drawable/bokguk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mypage_toptap">
+        app:layout_constraintTop_toBottomOf="@+id/mypage_toptap"
+     >
 
         <androidx.cardview.widget.CardView
             android:id="@+id/mypage_cardView"
@@ -67,9 +68,12 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/mypage" />
 
+
+
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mypage_profilebox"
             android:layout_width="220dp"
             android:layout_height="184dp"
             android:background="@color/white"
@@ -110,39 +114,35 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#888888"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
+        android:id="@+id/mypage_ScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/middle">
+        app:layout_constraintTop_toBottomOf="@+id/middle"
+        android:padding="15dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#CDDC39">
-
-
-            <TextView
-                android:id="@+id/mypage_scrollTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/scrolltitel"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/activity_cons"
@@ -150,8 +150,9 @@
                 android:layout_height="150dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/mypage_background"
-                app:layout_constraintTop_toBottomOf="@+id/mypage_scrollTitle"
-                tools:layout_editor_absoluteX="0dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/activity"
@@ -222,7 +223,7 @@
                 app:layout_constraintTop_toBottomOf="@id/activity_cons" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler1"
+                android:id="@+id/mypageRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginTop="10dp"
@@ -241,7 +242,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler1" />
+                app:layout_constraintTop_toBottomOf="@id/mypageRecyclerView" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -264,7 +265,6 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="20dp"
                     android:src="@drawable/earthwarm"
-                    app:layout_constraintBottom_toTopOf="@+id/textView5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -276,36 +276,14 @@
                     android:layout_marginEnd="56dp"
                     android:layout_marginBottom="20dp"
                     android:src="@drawable/honeybee"
-                    app:layout_constraintBottom_toTopOf="@+id/textView4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/earthwarm"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/support_image1"
-                    app:layout_constraintStart_toStartOf="@+id/support_image1" />
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/honeybee"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/support_image2"
-                    app:layout_constraintStart_toStartOf="@+id/support_image2" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 

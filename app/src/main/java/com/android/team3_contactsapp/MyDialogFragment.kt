@@ -27,35 +27,20 @@ class MyDialogFragment(private val mypageFragment: MypageFragment) : DialogFragm
 
         val builder = AlertDialog.Builder(requireActivity())
 
-        // 제목과 아이콘 설정
-        builder.setTitle("정보를 입력해주세요.")
-        builder.setIcon(R.drawable.seedimage)
-
         // 커스텀 뷰 설정
         builder.setView(customView)
 
         val edit1: EditText? = customView.findViewById(R.id.editText)
         val edit2: EditText? = customView.findViewById(R.id.editText2)
         val edit3: EditText? = customView.findViewById(R.id.editText3)
-        val listener = DialogInterface.OnClickListener { dialog, which ->
-            when (which) {
-                DialogInterface.BUTTON_POSITIVE -> {
-                    mypageFragment.updateInformation(
-                        edit1?.text.toString(),
-                        edit2?.text.toString(),
-                        edit3?.text.toString()
-                    )
-                }
-
-                DialogInterface.BUTTON_NEGATIVE -> {
-                    dismiss()
-                }
-            }
+        binding.btnOkay.setOnClickListener {
+            mypageFragment.updateInformation(
+                edit1?.text.toString(),
+                edit2?.text.toString(),
+                edit3?.text.toString()
+            )
+            dismiss()
         }
-
-        builder.setPositiveButton("확인", listener)
-        builder.setNegativeButton("취소", null)
-
         return customView
     }
 

@@ -2,7 +2,6 @@ package com.android.team3_contactsapp
 
 import android.os.Build
 import android.os.Bundle
-import android.telecom.Call
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +10,10 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.android.team3_contactsapp.databinding.FragmentContactDetailBinding
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1 = "data"
 
 class ContactDetailFragment : Fragment() {
-    private var param1: Member? = null
+    private var member: Member? = null
     private var _binding : FragmentContactDetailBinding? = null
     private val binding get() = _binding
 
@@ -26,7 +24,7 @@ class ContactDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getParcelable("data",Member::class.java)
+            member = it.getParcelable("data",Member::class.java)
         }
     }
 

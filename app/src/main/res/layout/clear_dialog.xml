@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="nickName" />
+            android:hint="nickName" />
 
         <EditText
             android:id="@+id/editText2"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="PhoneNumber" />
+            android:hint="PhoneNumber" />
 
         <EditText
             android:id="@+id/editText3"
@@ -32,6 +32,13 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="E-mail" />
+            android:hint="E-mail" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_okay"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="@string/Okay"
+            android:layout_gravity="center"/>
     </LinearLayout>
 </LinearLayout>
