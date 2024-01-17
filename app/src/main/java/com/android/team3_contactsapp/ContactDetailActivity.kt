@@ -1,7 +1,10 @@
 package com.android.team3_contactsapp
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
@@ -34,10 +37,36 @@ class ContactDetailActivity : AppCompatActivity(), FragmentDataListener {
         binding.ivCtDetailMyPicture.setImageResource(member?.MemberImg ?: 0)
         binding.tvCtDetailMobileNum.text = member?.myPhoneNumber
 
+        val btnMessage : Button = findViewById(R.id.btn_message)
+        val btnCall : Button = findViewById(R.id.btn_call)
+
+        btnMessage.setOnClickListener {
+            member?.myPhoneNumber?.let { phoneNumber ->
+                sendMessage(phoneNumber)
+            }
+        }
+        btnCall.setOnClickListener {
+            member?.myPhoneNumber?.let { phoneNumber ->
+                sendCall(phoneNumber)
+            }
+        }
+
         updateGroupInfo(0, member?.joinedGroupId.orEmpty())
         updateGroupInfo(1, member?.joinedGroupId.orEmpty())
         updateGroupInfo(2, member?.joinedGroupId.orEmpty())
     }
+
+    private fun sendMessage(phoneNumber: String) {
+        val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:$phoneNumber"))
+        intent.putExtra("sms_body", "안녕하세요, 메시지를 보내려고 합니다.")
+        startActivity(intent)
+    }
+
+    private fun sendCall(phoneNumber: String) {
+        val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
+        startActivity(intent)
+    }
+
     private fun updateGroupInfo(index: Int, groupIds: List<String>) {
         if (index < groupIds.size) {
             val groupId = groupIds[index]
