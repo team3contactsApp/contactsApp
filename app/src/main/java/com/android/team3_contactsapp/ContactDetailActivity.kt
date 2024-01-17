@@ -96,7 +96,6 @@ class ContactDetailActivity : AppCompatActivity(), FragmentDataListener {
     }
 
     override fun onBackPressed() {
-        // 백 버튼을 눌렀을 때 MyContactsFragment 로 돌아 가기
         super.onBackPressed()
     }
 }
