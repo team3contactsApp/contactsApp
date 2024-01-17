@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.FragmentMypageBinding
 
 private const val ARG_PARAM1 = "param1"
@@ -19,6 +20,8 @@ class MypageFragment : Fragment() {
     private var param2: String? = null
     private var _binding: FragmentMypageBinding? = null
     private val binding get() = _binding!!
+
+    private val initialItemCount = Data.myJoinedgroup.size
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -35,12 +38,24 @@ class MypageFragment : Fragment() {
     ): View? {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        //마이페이지 리사이클러뷰
+        val MyPageAdapter = MyPageAdapter(Data.myJoinedgroup)
+        binding.mypageRecyclerView.adapter = MyPageAdapter
+        binding.mypageRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+
+        //모임 그룹 개수에 따른 활동 횟수 증가
+        binding.activityCount.text = "${initialItemCount}"
+
+        //수정 다이어로그 생성
         binding.mypageClear.setOnClickListener {
             val dialogFragment = MyDialogFragment(this)
             dialogFragment.show(parentFragmentManager, "myDialog")
         }
         return view
+
     }
+
 
     fun updateInformation(name: String?, phoneNumber: String?, email: String?) {
         binding.mypageName.text = name
