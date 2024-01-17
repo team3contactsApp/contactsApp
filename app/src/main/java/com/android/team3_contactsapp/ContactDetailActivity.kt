@@ -2,40 +2,41 @@ package com.android.team3_contactsapp
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
 import kotlin.RuntimeException
 
-class ContactDetailActivity : AppCompatActivity(), FragmentDataListener {
+class ContactDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContactDetailBinding
     private var member: Member? = null
     private val groupList: MutableList<Group> = mutableListOf()
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityContactDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        member =intent.getParcelableExtra("data",Member::class.java)
+        Log.d("test","로그가 잘 돌아왔는지 확인 ${member}")
         val backButton: ImageView = findViewById(R.id.iv_back)
 
         backButton.setOnClickListener {
             onBackPressed()
         }
-    }
 
-    override fun onDataReceived(data: Member) {
-        member = data
-        updateUI()
-    }
-
-    private fun updateUI() {
         binding.tvCtDetailName.text = member?.Name
         binding.ivCtDetailMyPicture.setImageResource(member?.MemberImg ?: 0)
         binding.tvCtDetailMobileNum.text = member?.myPhoneNumber
+        binding.tvCtDetailNatureNum.text = member?.actCnt.toString()
+        binding.tvCtDetailNatureName.text = member?.title
 
         val btnMessage : Button = findViewById(R.id.btn_message)
         val btnCall : Button = findViewById(R.id.btn_call)
@@ -51,10 +52,12 @@ class ContactDetailActivity : AppCompatActivity(), FragmentDataListener {
             }
         }
 
+
         updateGroupInfo(0, member?.joinedGroupId.orEmpty())
         updateGroupInfo(1, member?.joinedGroupId.orEmpty())
         updateGroupInfo(2, member?.joinedGroupId.orEmpty())
     }
+
 
     private fun sendMessage(phoneNumber: String) {
         val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:$phoneNumber"))
