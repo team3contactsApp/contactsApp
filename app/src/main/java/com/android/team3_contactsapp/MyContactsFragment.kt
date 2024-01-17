@@ -1,6 +1,7 @@
 package com.android.team3_contactsapp
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -25,15 +26,15 @@ class MyContactsFragment : Fragment() {
 
     private var listener: FragmentDataListener? = null
 
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//
-//        if (context is FragmentDataListener) {
-//            listener = context
-//        } else {
-//            throw RuntimeException("$context must implement FragmentDataListener")
-//        }
-//    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is FragmentDataListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement FragmentDataListener")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

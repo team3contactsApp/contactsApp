@@ -14,8 +14,6 @@ class GroupDetailActivity : AppCompatActivity() {
         binding = ActivityGroupDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        group=Data.group[0]
-
         group?.let {
             binding.ivGroupDetailImg.setImageResource(it.groupImg)
             binding.tvGroupDetailName.text = it.groupName
@@ -29,5 +27,6 @@ class GroupDetailActivity : AppCompatActivity() {
 
 
     }
+
 
 }
