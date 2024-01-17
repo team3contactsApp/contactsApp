@@ -1,6 +1,8 @@
 package com.android.team3_contactsapp
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
@@ -8,9 +10,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.FragmentMypageBinding
+import java.util.Calendar
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -43,6 +47,34 @@ class MypageFragment : Fragment() {
         val MyPageAdapter = MyPageAdapter(Data.myJoinedgroup)
         binding.mypageRecyclerView.adapter = MyPageAdapter
         binding.mypageRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+
+        //날짜 다이어로그 띄우기
+        binding.btnDate.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month= calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val listener = DatePickerDialog.OnDateSetListener {
+                    datePICKER, i, i2, i3 -> binding.tvDate.text = "${i}년 ${i2 + 1}월 ${i3}일"
+            }
+            var picker = DatePickerDialog(requireContext(), listener, year, month, day)
+            picker.show()
+        }
+
+        //시간 다이어로그 띄우기
+        binding.btnTime.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR)
+            val minute = calendar.get(Calendar.MINUTE)
+
+            val listener = TimePickerDialog.OnTimeSetListener { timePicker, i, i2 ->
+
+                binding.tvTime.text = "${i}시 ${i2}분"
+            }
+            val picker = TimePickerDialog(requireContext(), listener, hour, minute, false)
+            picker.show()
+        }
 
         //모임 그룹 개수에 따른 활동 횟수 증가
         binding.activityCount.text = "${initialItemCount}"
