@@ -10,7 +10,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
+import com.android.team3_contactsapp.databinding.RecyclerviewItemContactDetailJoinedgroupBinding
 import kotlin.RuntimeException
 
 class ContactDetailActivity : AppCompatActivity() {
@@ -37,6 +39,7 @@ class ContactDetailActivity : AppCompatActivity() {
         binding.tvCtDetailMobileNum.text = member?.myPhoneNumber
         binding.tvCtDetailNatureNum.text = member?.actCnt.toString()
         binding.tvCtDetailNatureName.text = member?.title
+        binding.tvCtDetailGroupNameGroup.text = "${member?.Name}이 가입한 모임들"
 
         val btnMessage : Button = findViewById(R.id.btn_message)
         val btnCall : Button = findViewById(R.id.btn_call)
@@ -52,10 +55,9 @@ class ContactDetailActivity : AppCompatActivity() {
             }
         }
 
-
-        updateGroupInfo(0, member?.joinedGroupId.orEmpty())
-        updateGroupInfo(1, member?.joinedGroupId.orEmpty())
-        updateGroupInfo(2, member?.joinedGroupId.orEmpty())
+        val ctJoinedGroupAdapter = ContactDetailJoinedGroupAdapter(member!!.joinedGroupId)
+        binding.recyclerviewCdJoinedGroup.adapter =ctJoinedGroupAdapter
+        binding.recyclerviewCdJoinedGroup.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
     }
 
 
@@ -68,34 +70,6 @@ class ContactDetailActivity : AppCompatActivity() {
     private fun sendCall(phoneNumber: String) {
         val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
         startActivity(intent)
-    }
-
-    private fun updateGroupInfo(index: Int, groupIds: List<String>) {
-        if (index < groupIds.size) {
-            val groupId = groupIds[index]
-            val group = findGroupById(groupId)
-
-            if (group != null) {
-                val (groupNameId, groupDescId, groupPicId) = when (index) {
-                    0 -> Triple(R.id.tv_ctDetail_groupName, R.id.tv_ctDetail_groupDesc, R.id.iv_ctDetail_groupPic)
-                    1 -> Triple(R.id.tv_ctDetail_groupName1, R.id.tv_ctDetail_groupDesc1, R.id.iv_ctDetail_groupPic1)
-                    2 -> Triple(R.id.tv_ctDetail_groupName2, R.id.tv_ctDetail_groupDesc2, R.id.iv_ctDetail_groupPic2)
-                    else -> throw RuntimeException()
-                }
-
-                val tvGroupName = findViewById<TextView>(groupNameId)
-                val tvGroupDesc = findViewById<TextView>(groupDescId)
-                val ivGroupPic = findViewById<ImageView>(groupPicId)
-
-                tvGroupName.text = group.groupName
-                tvGroupDesc.text = group.groupDesc
-                ivGroupPic.setImageResource(group.groupImg)
-            }
-        }
-    }
-
-    private fun findGroupById(groupId: String): Group? {
-        return groupList.find { it.groupId == groupId }
     }
 
     override fun onBackPressed() {
