@@ -1,30 +1,30 @@
 package com.android.team3_contactsapp
 
-
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.android.team3_contactsapp.databinding.FragmentContactDetailBinding
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1 = "data"
 
 class ContactDetailFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
+    private var member: Member? = null
     private var _binding : FragmentContactDetailBinding? = null
     private val binding get() = _binding
 
-    private val fixedPhoneNumber = "01012345678"
 
+
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            member = it.getParcelable(ARG_PARAM1,Member::class.java)
         }
     }
 
@@ -39,14 +39,14 @@ class ContactDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.tvCtDetailName?.text = "홍길동"
+        binding?.tvCtDetailName?.text = member?.Name
 
         binding?.btnMessage?.setOnClickListener {
-            sendMessage(fixedPhoneNumber)
+            member?.let { it1 -> sendMessage(it1.myPhoneNumber) }
         }
 
         binding?.btnCall?.setOnClickListener {
-            sendCall(fixedPhoneNumber)
+            member?.let { it1 -> sendCall(it1.myPhoneNumber) }
         }
     }
 
@@ -65,11 +65,10 @@ class ContactDetailFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1:Bundle) =
             ContactDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putParcelable(ARG_PARAM1, param1)
                 }
             }
     }
