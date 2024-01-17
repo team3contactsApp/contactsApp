@@ -21,6 +21,8 @@ class MypageFragment : Fragment() {
     private var _binding: FragmentMypageBinding? = null
     private val binding get() = _binding!!
 
+    private val initialItemCount = Data.myJoinedgroup.size
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -41,6 +43,9 @@ class MypageFragment : Fragment() {
         val MyPageAdapter = MyPageAdapter(Data.myJoinedgroup)
         binding.mypageRecyclerView.adapter = MyPageAdapter
         binding.mypageRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+
+        //모임 그룹 개수에 따른 활동 횟수 증가
+        binding.activityCount.text = "${initialItemCount}"
 
         //수정 다이어로그 생성
         binding.mypageClear.setOnClickListener {

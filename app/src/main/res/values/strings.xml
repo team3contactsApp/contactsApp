@@ -17,5 +17,19 @@
     <string name="honeybee">꿀벌 살리기 캠페인</string>
     <string name="earthwarm">지구를 위한 모금</string>
     <string name="correction">정보 수정하기</string>
+<<<<<<< HEAD
     <string name="Okay">확인</string>
+=======
+    <string name="title_contactDetail">상세정보 페이지</string>
+    <string name="text_ct_memberName">멤버이름</string>
+    <string name="btn_message">MESSAGE</string>
+    <string name="btn_call">CALL</string>
+    <string name="detail_mobileName">Mobile</string>
+    <string name="detail_mobileNum">핸드폰 번호</string>
+    <string name="detail_natureNum">51</string>
+    <string name="detail_natureName">환경 보호가</string>
+    <string name="detail_groupNameGroup">$(클릭한 사람)이 가입한 모임</string>
+    <string name="detail_eventName">Event</string>
+    <string name="detail_alarmNum">10분이후 알림</string>
+>>>>>>> 65e28515cf931f3bd9c17c7ee45c242603dbbbb3
 </resources>
