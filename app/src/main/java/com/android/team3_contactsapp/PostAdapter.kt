@@ -8,7 +8,7 @@ import com.android.team3_contactsapp.databinding.RecyclerviewItemJoinedgroupBind
 import com.android.team3_contactsapp.databinding.RecyclerviewItemPeopleBinding
 
 
-class JoinedMemberAdapter(val mItems: MutableList<String>) : RecyclerView.Adapter<JoinedMemberAdapter.Holder>() {
+class PostAdapter(val mItems: MutableList<String>) : RecyclerView.Adapter<PostAdapter.Holder>() {
     inner class Holder(val binding: RecyclerviewItemPeopleBinding) : RecyclerView.ViewHolder(binding.root){
         val pImg = binding.ivPersonImg
         val pName = binding.tvPersonName
