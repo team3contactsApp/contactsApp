@@ -17,14 +17,14 @@ class ContactDetailFragment : Fragment() {
     private var _binding : FragmentContactDetailBinding? = null
     private val binding get() = _binding
 
-    private val fixedPhoneNumber = "01012345678"
+
 
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            member = it.getParcelable("data",Member::class.java)
+            member = it.getParcelable(ARG_PARAM1,Member::class.java)
         }
     }
 
@@ -39,14 +39,14 @@ class ContactDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.tvCtDetailName?.text = "홍길동"
+        binding?.tvCtDetailName?.text = member?.Name
 
         binding?.btnMessage?.setOnClickListener {
-            sendMessage(fixedPhoneNumber)
+            member?.let { it1 -> sendMessage(it1.myPhoneNumber) }
         }
 
         binding?.btnCall?.setOnClickListener {
-            sendCall(fixedPhoneNumber)
+            member?.let { it1 -> sendCall(it1.myPhoneNumber) }
         }
     }
 
