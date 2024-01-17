@@ -72,7 +72,22 @@ object Data {
             mutableListOf("group1","group2","group3","group4","group5"), mutableListOf("member2","member3","member4","member6","member7")),
     )
 
-
+    val post = mutableListOf(
+        Post("post1",R.drawable.bokguk,"글제목1","글내용1","작성자1",51),
+        Post("post2",R.drawable.bokguk,"글제목2","글내용2","작성자2",51),
+        Post("post3",R.drawable.bokguk,"글제목3","글내용3","작성자3",51),
+        Post("post4",R.drawable.bokguk,"글제목4","글내용4","작성자4",51),
+        Post("post5",R.drawable.bokguk,"글제목5","글내용5","작성자5",51),
+        Post("post6",R.drawable.bokguk,"글제목6","글내용6","작성자6",51),
+        Post("post7",R.drawable.bokguk,"글제목7","글내용7","작성자7",51),
+        Post("post8",R.drawable.bokguk,"글제목8","글내용8","작성자8",51),
+        Post("post9",R.drawable.bokguk,"글제목9","글내용9","작성자9",51),
+        Post("post10",R.drawable.bokguk,"글제목10","글내용10","작성자10",51),
+        Post("post11",R.drawable.bokguk,"글제목11","글내용11","작성자11",51),
+        Post("post12",R.drawable.bokguk,"글제목12","글내용12","작성자12",51),
+        Post("post13",R.drawable.bokguk,"글제목13","글내용13","작성자13",51),
+        Post("post14",R.drawable.bokguk,"글제목14","글내용14","작성자14",51),
+    )
 
 
 }

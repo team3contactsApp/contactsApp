@@ -20,14 +20,17 @@ class JoinedMemberAdapter(val mItems: MutableList<String>) : RecyclerView.Adapte
     }
 
     override fun getItemCount(): Int {
-       return mItems.size
+        return mItems.size
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val member = Data.member.find {
             it.memberId==mItems[position]
         }
-        member?.MemberImg?.let { holder.pImg.setImageResource(it) }
-        holder.pName.text = member?.Name
+        member?.let {
+            holder.pImg.setImageResource(it.MemberImg)
+            holder.pName.text = it.Name
+        }
+
     }
 }
