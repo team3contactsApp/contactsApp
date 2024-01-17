@@ -20,7 +20,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         app:tabIconTint="@color/main_tab_color_selector"
         app:tabTextColor="@color/main_tab_color_selector"
         app:tabIndicatorColor="#38CE28"
