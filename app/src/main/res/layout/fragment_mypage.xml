@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MypageFragment">
+    tools:context=".MypageFragment"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mypage_toptap"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#009688"
+        android:background="#AEF8A7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
@@ -20,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:text="마이페이지"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,11 +45,11 @@
         android:id="@+id/middle"
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:background="@drawable/bokguk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mypage_toptap">
+        app:layout_constraintTop_toBottomOf="@+id/mypage_toptap"
+     >
 
         <androidx.cardview.widget.CardView
             android:id="@+id/mypage_cardView"
@@ -67,9 +68,12 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/mypage" />
 
+
+
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mypage_profilebox"
             android:layout_width="220dp"
             android:layout_height="184dp"
             android:background="@color/white"
@@ -110,7 +114,17 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#888888"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -121,13 +135,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/middle">
+        app:layout_constraintTop_toBottomOf="@+id/middle"
+        android:padding="15dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#CDDC39">
+            android:layout_height="match_parent">
 
 
             <TextView
@@ -222,7 +236,7 @@
                 app:layout_constraintTop_toBottomOf="@id/activity_cons" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler1"
+                android:id="@+id/mypageRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginTop="10dp"
@@ -241,7 +255,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler1" />
+                app:layout_constraintTop_toBottomOf="@id/mypageRecyclerView" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -306,6 +320,7 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 
