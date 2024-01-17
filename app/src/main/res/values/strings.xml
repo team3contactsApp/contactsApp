@@ -29,4 +29,5 @@
     <string name="detail_groupNameGroup">$(클릭한 사람)이 가입한 모임</string>
     <string name="detail_eventName">Event</string>
     <string name="detail_alarmNum">10분이후 알림</string>
+    <string name="mypage_memotext">모임 일정 메모</string>
 </resources>
