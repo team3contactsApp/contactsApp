@@ -1,6 +1,7 @@
 package com.android.team3_contactsapp
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter
     inner class Holder(val binding: RecyclerviewItemContactBinding) : RecyclerView.ViewHolder(binding.root){
         val personImg = binding.ivPersonImg
         val personName = binding.tvPersonName
+        val personLike = binding.ivLike
     }
 
     interface ItemClick {
@@ -31,12 +33,41 @@ class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter
         val member = Data.member.find {
             it.memberId==mItems[position]
         }
+        //Log.d("Test","member는 ${member} ")
         member?.let {
             holder.itemView.setOnClickListener {view ->
                 itemClick?.onClick(view,position)
             }
+            //Log.d("Test","리스트와 아이디는  ${it.likeIdList} , ${it.memberId} ")
+            if( Data.member[0].likeIdList.contains(it.memberId)){
+                holder.personLike.setImageResource(R.drawable.heartfill)
+                holder.personLike.tag = "hearfill"
+            } else {
+                holder.personLike.setImageResource(R.drawable.heart)
+                holder.personLike.tag = "heart"
+            }
+
             holder.personImg.setImageResource(it.MemberImg)
             holder.personName.text = it.Name
+
+            holder.personLike.setOnClickListener {view ->
+                if(holder.personLike.tag=="heart"){
+                    holder.personLike.setImageResource(R.drawable.heartfill)
+                    holder.personLike.tag = "hearfill"
+                    Data.member[0].likeIdList.add(it.memberId)
+                    Log.d("test","좋아요 리스트 추가확인 ${Data.member[0].likeIdList}")
+                } else {
+                    holder.personLike.setImageResource(R.drawable.heart)
+                    holder.personLike.tag = "heart"
+                    Data.member[0].likeIdList.removeIf {str ->
+                        str == it.memberId
+                    }
+                    Log.d("test","좋아요 리스트 삭제확인 ${Data.member[0].likeIdList}")
+                }
+            }
+
         }
+
+
     }
 }
