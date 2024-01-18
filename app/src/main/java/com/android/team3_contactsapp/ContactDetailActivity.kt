@@ -18,9 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
 
 
-class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener {
+class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     private lateinit var binding: ActivityContactDetailBinding
     private var member: Member? = null
+    private var listener: FragmentDataListener? = null
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +79,7 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener {
         val alertDialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
             .setTitle("정보 수정")
-            .setPositiveButton("확인", null) // Set the positive button to null initially
+            .setPositiveButton("확인", null)
             .setNegativeButton("취소", null)
 
         val alertDialog = alertDialogBuilder.show()
@@ -98,7 +99,8 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener {
                 binding.tvCtDetailMobileNum.text = newPhoneNum
                 binding.tvCtDetailGroupNameGroup.text = "${newName}님이 가입한 모임"
                 onUpdateInfo(newName, newPhoneNum)
-                alertDialog.dismiss() // Dismiss the dialog if input is valid
+                alertDialog.dismiss()
+                listener?.onDataReceived(member!!)
             } else {
                 validationMessage.text = "잘못된 입력입니다."
                 validationMessage.visibility = View.VISIBLE
@@ -139,7 +141,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener {
         binding.tvCtDetailName.text = newName
         binding.tvCtDetailMobileNum.text = newPhoneNum
     }
-
 
     private fun sendMessage(phoneNumber: String) {
         val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:$phoneNumber"))
