@@ -2,6 +2,7 @@ package com.android.team3_contactsapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.android.team3_contactsapp.databinding.ActivityMainBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -61,5 +62,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }.attach()
+
+        //binding.framelayout.visibility = View.VISIBLE
+        //setFragment(ContactDetailFragment())
+    }
+
+    private fun setFragment(frag: Fragment) {
+        supportFragmentManager.commit {
+            replace(R.id.framelayout, frag)
+            setReorderingAllowed(true)
+            addToBackStack("")
+        }
     }
 }
