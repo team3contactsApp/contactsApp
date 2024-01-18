@@ -49,11 +49,7 @@ class MyContactsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val joinedGroupAdapter = JoinedGroupAdapter(Data.myJoinedgroup)
         val myContactsAdapter = MyContactsAdapter(Data.member[0].friendsPhoneNumbersId)
-        binding.rvMyGroupList.adapter = joinedGroupAdapter
-        binding.rvMyGroupList.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvMyContactsList.adapter = myContactsAdapter
         binding.rvMyContactsList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -116,6 +112,7 @@ class MyContactsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         listener = null
+        //Dialog.dismiss()
     }
     fun createId(name:String): String{
         val charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
