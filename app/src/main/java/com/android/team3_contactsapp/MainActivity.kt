@@ -83,7 +83,6 @@ class MainActivity : AppCompatActivity(),FragmentDataListener {
 
         setFragment(fragment)
     }
-}
 
     override fun onDataReceived(data: Member) {
         val intent = Intent(this,ContactDetailActivity::class.java)
