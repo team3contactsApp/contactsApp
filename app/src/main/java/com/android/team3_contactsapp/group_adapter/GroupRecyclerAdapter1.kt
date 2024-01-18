@@ -22,9 +22,7 @@ class GroupRecyclerAdapter1(private val dataList: MutableList<Group>) :
     var itemClick : ItemClick? = null
 
     inner class Holder(private val binding: RecyclerviewItemGroupBinding) : RecyclerView.ViewHolder(binding.root) {
-
-
-
+        
         fun bind(data : Group) {
             binding.ivGroupImg.setImageResource(data.groupImg)
             binding.tvGroupName.setText(data.groupName)
