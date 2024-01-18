@@ -1,6 +1,7 @@
 package com.android.team3_contactsapp
 
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +14,15 @@ class GroupDetailFragment : Fragment() {
     private var _binding : FragmentGroupDetailBinding? =null
     private val binding get() = _binding!!
 
+    private var myData : Group ?= null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        arguments?.let {
+            myData = it.getParcelable("key")
+
+        }
     }
 
     override fun onCreateView(
@@ -30,8 +37,8 @@ class GroupDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.ivGroupDetailImg.setImageResource(R.drawable.person)
-        binding.tvGroupDesc.text= "설명"
-        binding.tvGroupDetailName.text= "바다사랑단"
+        binding.tvGroupDesc.text = "설명"
+        binding.tvGroupDetailName.text = "바다 사랑단"
         val memberids = Data.group.find {
             it.groupId == "group1"
         }!!.joinedMemberId
@@ -55,6 +62,13 @@ class GroupDetailFragment : Fragment() {
         fun newInstance() =
             GroupDetailFragment().apply {
                 arguments = Bundle().apply {
+                }
+            }
+
+        fun newInstance2(pram1: Group) =
+            GroupDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable("key", pram1)
                 }
             }
     }

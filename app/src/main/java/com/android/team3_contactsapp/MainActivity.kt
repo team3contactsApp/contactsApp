@@ -3,6 +3,7 @@ package com.android.team3_contactsapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.util.Log
 import com.android.team3_contactsapp.databinding.ActivityMainBinding
 import androidx.fragment.app.Fragment
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity(),FragmentDataListener {
             })
         }
 
+
         TabLayoutMediator(binding.tabLayout, binding.viewpager) { tab, position ->
             when(position) {
                 0 -> {
@@ -65,6 +67,24 @@ class MainActivity : AppCompatActivity(),FragmentDataListener {
         }.attach()
     }
 
+    private fun setFragment(frag: Fragment) {
+        supportFragmentManager.commit {
+            replace(R.id.framelayout, frag)
+            setReorderingAllowed(true)
+            addToBackStack("")
+        }
+    }
+
+    fun setGroupDetailFragment(data: Group) {
+        binding.tabLayout.visibility = View.INVISIBLE
+        binding.viewpager.visibility = View.INVISIBLE
+
+        val fragment = GroupDetailFragment.newInstance2(data)
+
+        setFragment(fragment)
+    }
+}
+
     override fun onDataReceived(data: Member) {
         val intent = Intent(this,ContactDetailActivity::class.java)
         intent.putExtra("data",data)
@@ -72,3 +92,4 @@ class MainActivity : AppCompatActivity(),FragmentDataListener {
         Log.d("test","여기 거처가는거냐? ${data}, ${intent}")
     }
 }
+
