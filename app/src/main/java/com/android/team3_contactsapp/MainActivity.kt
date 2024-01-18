@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
+
         TabLayoutMediator(binding.tabLayout, binding.viewpager) { tab, position ->
             when(position) {
                 0 -> {
@@ -62,9 +63,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }.attach()
-
-        //binding.framelayout.visibility = View.VISIBLE
-        //setFragment(ContactDetailFragment())
     }
 
     private fun setFragment(frag: Fragment) {
@@ -73,5 +71,14 @@ class MainActivity : AppCompatActivity() {
             setReorderingAllowed(true)
             addToBackStack("")
         }
+    }
+
+    fun setGroupDetailFragment(data: Group) {
+        binding.tabLayout.visibility = View.INVISIBLE
+        binding.viewpager.visibility = View.INVISIBLE
+
+        val fragment = GroupDetailFragment.newInstance2(data)
+
+        setFragment(fragment)
     }
 }

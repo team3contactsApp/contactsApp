@@ -2,10 +2,12 @@ package com.android.team3_contactsapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
 import com.android.team3_contactsapp.databinding.ActivityGroupDetailBinding
 import com.android.team3_contactsapp.databinding.ActivityMainBinding
 import com.android.team3_contactsapp.databinding.FragmentGroupBinding
@@ -35,9 +37,6 @@ class GroupFragment : Fragment() {
     ): View? {
         //return inflater.inflate(R.layout.fragment_group, container, false)
         binding = FragmentGroupBinding.inflate(inflater)
-
-
-
         return binding.root
     }
 
@@ -50,11 +49,15 @@ class GroupFragment : Fragment() {
         groupAdapter.itemClick = object : GroupRecyclerAdapter1.ItemClick {
             override fun onClick(view: View, position: Int) {
 
+                val mainActivityView = (activity as MainActivity)
+                mainActivityView.setGroupDetailFragment(Data.group[position])
+
             }
         }
     }
 
     companion object {
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             GroupFragment().apply {
