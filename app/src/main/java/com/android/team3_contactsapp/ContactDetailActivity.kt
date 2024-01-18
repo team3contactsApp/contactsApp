@@ -2,40 +2,44 @@ package com.android.team3_contactsapp
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
-import kotlin.RuntimeException
 
-class ContactDetailActivity : AppCompatActivity(), FragmentDataListener {
+
+class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     private lateinit var binding: ActivityContactDetailBinding
     private var member: Member? = null
-    private val groupList: MutableList<Group> = mutableListOf()
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityContactDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val backButton: ImageView = findViewById(R.id.iv_back)
+        member =intent.getParcelableExtra("data",Member::class.java)
 
+        val backButton: ImageView = findViewById(R.id.iv_back)
         backButton.setOnClickListener {
             onBackPressed()
         }
-    }
 
-    override fun onDataReceived(data: Member) {
-        member = data
-        updateUI()
-    }
-
-    private fun updateUI() {
         binding.tvCtDetailName.text = member?.Name
         binding.ivCtDetailMyPicture.setImageResource(member?.MemberImg ?: 0)
         binding.tvCtDetailMobileNum.text = member?.myPhoneNumber
+        binding.tvCtDetailNatureNum.text = member?.actCnt.toString()
+        binding.tvCtDetailNatureName.text = member?.title
+        binding.tvCtDetailGroupNameGroup.text = "${member?.Name}님이 가입한 모임들"
 
         val btnMessage : Button = findViewById(R.id.btn_message)
         val btnCall : Button = findViewById(R.id.btn_call)
@@ -51,9 +55,87 @@ class ContactDetailActivity : AppCompatActivity(), FragmentDataListener {
             }
         }
 
-        updateGroupInfo(0, member?.joinedGroupId.orEmpty())
-        updateGroupInfo(1, member?.joinedGroupId.orEmpty())
-        updateGroupInfo(2, member?.joinedGroupId.orEmpty())
+        val ctJoinedGroupAdapter = ContactDetailJoinedGroupAdapter(member!!.joinedGroupId)
+        binding.recyclerviewCdJoinedGroup.adapter =ctJoinedGroupAdapter
+        binding.recyclerviewCdJoinedGroup.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+
+        binding. ctDetailClear.setOnClickListener {
+            showUpdateDialog()
+        }
+    }
+
+    private fun showUpdateDialog() {
+        val dialogView =
+            LayoutInflater.from(this).inflate(R.layout.dialog_update_info, null)
+        val nameEditText: EditText = dialogView.findViewById(R.id.editTextName)
+        val phoneNumEditText: EditText = dialogView.findViewById(R.id.editTextPhone)
+        val validationMessage: TextView = dialogView.findViewById(R.id.tvValidationMessage)
+
+        nameEditText.setText(binding.tvCtDetailName.text)
+
+        val alertDialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setTitle("정보 수정")
+            .setPositiveButton("확인", null)
+            .setNegativeButton("취소", null)
+
+        val alertDialog = alertDialogBuilder.show()
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val newName = nameEditText.text.toString()
+            val newPhoneNum = phoneNumEditText.text.toString()
+
+            if (isValidInput(newName, newPhoneNum)) {
+
+                member?.let {
+                    it.Name = newName
+                    it.myPhoneNumber = newPhoneNum
+                }
+
+                binding.tvCtDetailName.text =newName
+                binding.tvCtDetailMobileNum.text = newPhoneNum
+                binding.tvCtDetailGroupNameGroup.text = "${newName}님이 가입한 모임"
+                onUpdateInfo(newName, newPhoneNum)
+                alertDialog.dismiss()
+            } else {
+                validationMessage.text = "잘못된 입력입니다."
+                validationMessage.visibility = View.VISIBLE
+
+
+                if (!isValidName(newName)) {
+                    nameEditText.requestFocus()
+                } else if (!isValidPhoneNumber(newPhoneNum)) {
+                    phoneNumEditText.requestFocus()
+                } else {
+                    validationMessage.text = ""
+                    validationMessage.visibility = View.GONE
+                    alertDialog.dismiss()
+                }
+            }
+        }
+    }
+
+    private fun isValidInput(name: String, phoneNumber: String): Boolean {
+        return isValidName(name) && isValidPhoneNumber(phoneNumber)
+    }
+
+    private fun isValidNameOrPhoneNumber(value: String, regex: Regex): Boolean {
+        return value.isNotEmpty() && regex.matches(value)
+    }
+
+    private fun isValidName(name: String): Boolean {
+        val nameRegex = Regex("^[a-zA-Z가-힣0-9]+$")
+        return isValidNameOrPhoneNumber(name, nameRegex)
+    }
+
+    private fun isValidPhoneNumber(phoneNumber: String): Boolean {
+        val phoneNumberRegex = Regex("^[0-9]{10,11}$")
+        return isValidNameOrPhoneNumber(phoneNumber, phoneNumberRegex)
+    }
+
+    override fun onUpdateInfo(newName: String, newPhoneNum: String) {
+        binding.tvCtDetailName.text = newName
+        binding.tvCtDetailMobileNum.text = newPhoneNum
     }
 
     private fun sendMessage(phoneNumber: String) {
@@ -67,36 +149,8 @@ class ContactDetailActivity : AppCompatActivity(), FragmentDataListener {
         startActivity(intent)
     }
 
-    private fun updateGroupInfo(index: Int, groupIds: List<String>) {
-        if (index < groupIds.size) {
-            val groupId = groupIds[index]
-            val group = findGroupById(groupId)
-
-            if (group != null) {
-                val (groupNameId, groupDescId, groupPicId) = when (index) {
-                    0 -> Triple(R.id.tv_ctDetail_groupName, R.id.tv_ctDetail_groupDesc, R.id.iv_ctDetail_groupPic)
-                    1 -> Triple(R.id.tv_ctDetail_groupName1, R.id.tv_ctDetail_groupDesc1, R.id.iv_ctDetail_groupPic1)
-                    2 -> Triple(R.id.tv_ctDetail_groupName2, R.id.tv_ctDetail_groupDesc2, R.id.iv_ctDetail_groupPic2)
-                    else -> throw RuntimeException()
-                }
-
-                val tvGroupName = findViewById<TextView>(groupNameId)
-                val tvGroupDesc = findViewById<TextView>(groupDescId)
-                val ivGroupPic = findViewById<ImageView>(groupPicId)
-
-                tvGroupName.text = group.groupName
-                tvGroupDesc.text = group.groupDesc
-                ivGroupPic.setImageResource(group.groupImg)
-            }
-        }
-    }
-
-    private fun findGroupById(groupId: String): Group? {
-        return groupList.find { it.groupId == groupId }
-    }
-
     override fun onBackPressed() {
-        // 백 버튼을 눌렀을 때 MyContactsFragment 로 돌아 가기
         super.onBackPressed()
+        showUpdateDialog()
     }
 }

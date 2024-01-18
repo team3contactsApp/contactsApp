@@ -11,7 +11,7 @@ import com.android.team3_contactsapp.databinding.RecyclerviewItemJoinedgroupBind
 import kotlinx.parcelize.Parcelize
 
 
-class MyContactsAdapter (val mItems: MutableList<MyContacts>) : RecyclerView.Adapter<MyContactsAdapter.Holder>() {
+class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter<MyContactsAdapter.Holder>() {
     inner class Holder(val binding: RecyclerviewItemContactBinding) : RecyclerView.ViewHolder(binding.root){
         val personImg = binding.ivPersonImg
         val personName = binding.tvPersonName
@@ -32,11 +32,16 @@ class MyContactsAdapter (val mItems: MutableList<MyContacts>) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.itemView.setOnClickListener {
-            itemClick?.onClick(it,position)
+        val member = Data.member.find {
+            it.memberId==mItems[position]
         }
-        holder.personImg.setImageResource(mItems[position].img)
-        holder.personName.text = mItems[position].name
-        holder.pemail.text = mItems[position].email
+        member?.let {
+            holder.itemView.setOnClickListener {view ->
+                itemClick?.onClick(view,position)
+            }
+            holder.personImg.setImageResource(it.MemberImg)
+            holder.personName.text = it.Name
+            holder.pemail.text = it.email
+        }
     }
 }

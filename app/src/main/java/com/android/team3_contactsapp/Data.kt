@@ -47,7 +47,7 @@ object Data {
 
     val member = mutableListOf(
         Member("member1",R.drawable.person,"사람이름1","1234@mail.com",51,"환경보호가","010-1234-1234",
-            mutableListOf("group1","group2","group3","group4","group5"), mutableListOf("member2","member3","member4","member6","member7")),
+            mutableListOf("group1","group2","group3","group4","group5"), mutableListOf("member2")),
         Member("member2",R.drawable.person,"사람이름2","1234@mail.com",51,"환경보호가","010-1234-1234",
             mutableListOf("group1","group2","group3","group4","group5"), mutableListOf("member2","member3","member4","member6","member7")),
         Member("member3",R.drawable.person,"사람이름3","1234@mail.com",51,"환경보호가","010-1234-1234",

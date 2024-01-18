@@ -40,12 +40,13 @@
             app:layout_constraintStart_toEndOf="@+id/iv_back"
             app:layout_constraintTop_toTopOf="@+id/iv_back" />
 
-        <ImageView
-            android:id="@+id/iv_ctDetail_setting"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ctDetail_Clear"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginEnd="8dp"
-            tools:src="@drawable/iv_menu"
+            android:text="@string/correction"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctDetail_constraintLayout"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ctDetail_constraintLayout2"
@@ -249,8 +250,8 @@
                     android:id="@+id/iv_ctDetail_naturePic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/iv_treelevel"
                     android:adjustViewBounds="true"
+                    android:src="@drawable/iv_treelevel"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/tv_ctDetail_natureName"
                     app:layout_constraintStart_toStartOf="@+id/tv_ctDetail_natureName"
@@ -258,142 +259,28 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ctDetail_constraintLayout5"
+            <TextView
+                android:id="@+id/tv_ctDetail_groupNameGroup"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/ctDetail_groupNameGroup"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ctDetail_constraintLayout4" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_cd_joinedGroup"
                 android:layout_width="match_parent"
-                android:layout_height="336dp"
+                android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ctDetail_constraintLayout4"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_groupNameGroup"/>
 
-
-                <TextView
-                    android:id="@+id/tv_ctDetail_groupDesc2"
-                    android:layout_width="270dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="모임설명모임설명모임설명모임설명모임설명모임설명모임설명모임설명모임설명"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintStart_toEndOf="@+id/iv_ctDetail_groupPic2"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_groupName2" />
-
-                <TextView
-                    android:id="@+id/tv_ctDetail_groupName2"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="모임이름"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/iv_ctDetail_groupPic2"
-                    app:layout_constraintTop_toTopOf="@+id/iv_ctDetail_groupPic2" />
-
-                <TextView
-                    android:id="@+id/tv_ctDetail_groupDesc1"
-                    android:layout_width="270dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="모임설명모임설명모임설명모임설명모임설명모임설명모임설명모임설명모임설명"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintStart_toEndOf="@+id/iv_ctDetail_groupPic1"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_groupName1" />
-
-                <TextView
-                    android:id="@+id/tv_ctDetail_groupName1"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="모임이름"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/iv_ctDetail_groupPic1"
-                    app:layout_constraintTop_toTopOf="@+id/iv_ctDetail_groupPic1" />
-
-                <TextView
-                    android:id="@+id/tv_ctDetail_groupNameGroup"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
-                    android:text="@string/ctDetail_groupNameGroup"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/iv_ctDetail_groupPic"
-                    android:layout_width="96dp"
-                    android:layout_height="76dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_groupNameGroup"
-                    tools:src="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/iv_ctDetail_groupPic1"
-                    android:layout_width="96dp"
-                    android:layout_height="76dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_ctDetail_groupPic"
-                    tools:src="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/iv_ctDetail_groupPic2"
-                    android:layout_width="96dp"
-                    android:layout_height="76dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_ctDetail_groupPic1"
-                    tools:src="@tools:sample/avatars" />
-
-                <TextView
-                    android:id="@+id/tv_ctDetail_groupName"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="모임이름"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/iv_ctDetail_groupPic"
-                    app:layout_constraintTop_toTopOf="@+id/iv_ctDetail_groupPic" />
-
-                <TextView
-                    android:id="@+id/tv_ctDetail_groupDesc"
-                    android:layout_width="270dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="모임설명모임설명모임설명모임설명모임설명모임설명모임설명모임설명모임설명"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintStart_toEndOf="@+id/iv_ctDetail_groupPic"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_groupName" />
-
-                <ImageView
-                    android:id="@+id/btn_floating"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    tools:src="@tools:sample/avatars"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
