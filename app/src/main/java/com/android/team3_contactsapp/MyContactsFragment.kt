@@ -1,6 +1,9 @@
 package com.android.team3_contactsapp
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.FragmentMyContactsBinding
@@ -44,11 +48,12 @@ class MyContactsFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val joinedGroupAdapter = JoinedGroupAdapter(Data.myJoinedgroup)
-        val myContactsAdapter = MyContactsAdapter(Data.myContacts)
+        val myContactsAdapter = MyContactsAdapter(Data.member[0].friendsPhoneNumbersId)
         binding.rvMyGroupList.adapter = joinedGroupAdapter
         binding.rvMyGroupList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -61,6 +66,42 @@ class MyContactsFragment : Fragment() {
                 Log.d("test", "onViewCreated data =  ${data}")
                 listener?.onDataReceived(data)
             }
+        }
+        binding.ivAddContact.setOnClickListener {
+            var builder = AlertDialog.Builder(context)
+            builder.setTitle("연락처 추가하기")
+
+            var view = layoutInflater.inflate(R.layout.dialog_addcontact, null)
+            builder.setView(view)
+
+            var listener = DialogInterface.OnClickListener { p0, p1 ->
+                val alert = p0 as AlertDialog
+                val name = alert.findViewById<EditText>(R.id.et_dialog_name)
+                val phone = alert.findViewById<EditText>(R.id.et_dialog_phone)
+                val email = alert.findViewById<EditText>(R.id.et_dialog_email)
+
+                val id = createId(name.text.toString())
+                Data.member.add(
+                    Member(
+                        id,
+                        R.drawable.person,
+                        name.text.toString(),
+                        if(email.text.isNotEmpty()) email.text.toString() else "",
+                        0,
+                        "신규회원",
+                        phone.text.toString(),
+                        mutableListOf(),
+                        mutableListOf()
+                    )
+                )
+                Data.member[0].friendsPhoneNumbersId.add(id)
+                Log.d("test","추가됨 ${name.text}, ${email.text}, ${phone.text} .${Data.member[0].friendsPhoneNumbersId}")
+            }
+
+            builder.setPositiveButton("추가하기", listener)
+            builder.setNegativeButton("취소", null)
+
+            builder.show()
         }
     }
 
@@ -79,4 +120,11 @@ class MyContactsFragment : Fragment() {
         _binding = null
         listener = null
     }
+    fun createId(name:String): String{
+        val charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        var id = (1..10).map { charset.random() }.joinToString("")
+        id+=name
+        return id
+    }
+
 }
