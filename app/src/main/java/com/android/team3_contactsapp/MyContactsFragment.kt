@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.FragmentMyContactsBinding
+import com.google.android.material.snackbar.Snackbar
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -84,6 +85,7 @@ class MyContactsFragment : Fragment() {
                         "신규회원",
                         phone.text.toString(),
                         mutableListOf(),
+                        mutableListOf(),
                         mutableListOf()
                     )
                 )
@@ -96,6 +98,19 @@ class MyContactsFragment : Fragment() {
 
             builder.show()
         }
+
+//        binding.ivLikeIcon.setOnClickListener {
+//            if(!isLike){
+//                binding.ivLikeIcon.setImageResource(R.drawable.heartredfill)
+//                Snackbar.make(it,"관심목록에 추가됐습니다.",Snackbar.LENGTH_SHORT).show()
+//                isLike=true
+//            } else {
+//                binding.ivLikeIcon.setImageResource(R.drawable.heart)
+//                Snackbar.make(it,"관심목록에 삭제됐습니다.",Snackbar.LENGTH_SHORT).show()
+//                isLike=false
+//            }
+//        }
+
     }
 
     companion object {

@@ -162,4 +162,5 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     override fun onDestroy() {
         super.onDestroy()
     }
+
 }

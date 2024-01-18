@@ -32,7 +32,6 @@ class MypageFragment : Fragment() {
     private var param2: String? = null
     private var _binding: FragmentMypageBinding? = null
     private val binding get() = _binding!!
-
     private val initialItemCount = Data.myJoinedgroup.size
 
     override fun onCreate(savedInstanceState: Bundle?) {
