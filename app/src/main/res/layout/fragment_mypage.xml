@@ -88,7 +88,7 @@
                 android:layout_width="176dp"
                 android:layout_height="28dp"
                 android:layout_marginTop="24dp"
-                android:hint="@string/telable"
+                android:hint="@string/Mypage_phoneNumber"
                 app:layout_constraintStart_toStartOf="@+id/activity"
                 app:layout_constraintTop_toBottomOf="@+id/activity" />
 
@@ -97,7 +97,7 @@
                 android:layout_width="176dp"
                 android:layout_height="28dp"
                 android:layout_marginTop="12dp"
-                android:hint="@string/email"
+                android:hint="@string/Mypage_email"
                 app:layout_constraintStart_toStartOf="@+id/mypage_phonenumber"
                 app:layout_constraintTop_toBottomOf="@+id/mypage_phonenumber" />
 
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/bokbear"
+                android:text="@string/Mypage_name"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold"
