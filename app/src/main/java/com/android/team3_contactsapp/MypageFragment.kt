@@ -2,8 +2,17 @@ package com.android.team3_contactsapp
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
+import android.media.AudioAttributes
+import android.media.RingtoneManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +21,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.FragmentMypageBinding
 import java.util.Calendar
@@ -42,21 +54,39 @@ class MypageFragment : Fragment() {
     ): View? {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
         val view = binding.root
+        val MyPageAdapter = MyPageAdapter(Data.myJoinedgroup)
 
         //마이페이지 리사이클러뷰
-        val MyPageAdapter = MyPageAdapter(Data.myJoinedgroup)
         binding.mypageRecyclerView.adapter = MyPageAdapter
-        binding.mypageRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+        binding.mypageRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+
+        //아이템 클릭처리
+        MyPageAdapter.itemClick = object : MyPageAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                val clickedItem = Data.myJoinedgroup[position]
+                Toast.makeText(
+                    requireContext(),
+                    "${clickedItem.name}이 선택 되었습니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                //항목 선택 시 알림 설정 Fragment 열기
+                val notifyDialogFragment = NotificationDialogFragment(this@MypageFragment)
+                notifyDialogFragment.show(childFragmentManager, "NotificationDialog")
+            }
+        }
 
         //날짜 다이어로그 띄우기
         binding.btnDate.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
-            val month= calendar.get(Calendar.MONTH)
+            val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val listener = DatePickerDialog.OnDateSetListener {
-                    datePICKER, i, i2, i3 -> binding.tvDate.text = "${i}년 ${i2 + 1}월 ${i3}일"
+            val listener = DatePickerDialog.OnDateSetListener { datePICKER, i, i2, i3 ->
+                binding.tvDate.text = "${i}년 ${i2 + 1}월 ${i3}일"
             }
             var picker = DatePickerDialog(requireContext(), listener, year, month, day)
             picker.show()
@@ -96,7 +126,6 @@ class MypageFragment : Fragment() {
 
     }
 
-
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
@@ -107,4 +136,6 @@ class MypageFragment : Fragment() {
                 }
             }
     }
+
+
 }
