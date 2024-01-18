@@ -259,7 +259,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="270dp"
+                android:layout_height="290dp"
                 android:layout_marginTop="20dp"
                 android:background="#FFEB3B"
                 android:padding="15dp"
@@ -281,7 +281,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="170dp"
                     android:layout_marginTop="12dp"
                     android:background="@color/white"
                     app:layout_constraintTop_toBottomOf="@+id/volunteerDate"
@@ -332,28 +332,6 @@
                         app:layout_constraintTop_toTopOf="@+id/tv_memoTime"
                         app:layout_constraintVertical_bias="1.0" />
 
-                    <TextView
-                        android:id="@+id/tv_memoGroup"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="Group"
-                        android:textSize="20dp"
-                        app:layout_constraintStart_toStartOf="@+id/tv_memoTime"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_memoTime" />
-
-                    <TextView
-                        android:id="@+id/tv_Group"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:hint="나무 심기 모임"
-                        android:textSize="20dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_memoGroup"
-                        app:layout_constraintStart_toEndOf="@+id/tv_memoGroup"
-                        app:layout_constraintTop_toTopOf="@+id/tv_memoGroup"
-                        app:layout_constraintVertical_bias="0.0" />
-
                     <ImageView
                         android:id="@+id/btn_Date"
                         android:layout_width="25dp"
@@ -372,8 +350,17 @@
                         android:src="@drawable/clock"
                         app:layout_constraintEnd_toEndOf="@+id/btn_Date"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/btn_calender"
+                        app:layout_constraintStart_toStartOf="@+id/btn_Date"
                         app:layout_constraintTop_toBottomOf="@+id/btn_Date" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_alram"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="알람 설정하기"/>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
