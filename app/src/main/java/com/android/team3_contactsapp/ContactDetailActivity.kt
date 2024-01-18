@@ -21,7 +21,6 @@ import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
 class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     private lateinit var binding: ActivityContactDetailBinding
     private var member: Member? = null
-    private var listener: FragmentDataListener? = null
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,7 +99,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                 binding.tvCtDetailGroupNameGroup.text = "${newName}님이 가입한 모임"
                 onUpdateInfo(newName, newPhoneNum)
                 alertDialog.dismiss()
-                listener?.onDataReceived(member!!)
             } else {
                 validationMessage.text = "잘못된 입력입니다."
                 validationMessage.visibility = View.VISIBLE
