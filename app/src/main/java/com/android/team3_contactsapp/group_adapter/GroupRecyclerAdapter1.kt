@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.team3_contactsapp.Data
 import com.android.team3_contactsapp.Group
+import com.android.team3_contactsapp.MainActivity
 import com.android.team3_contactsapp.Member
 import com.android.team3_contactsapp.R
 import com.android.team3_contactsapp.databinding.FragmentGroupBinding
@@ -25,15 +26,21 @@ class GroupRecyclerAdapter1(private val dataList: MutableList<Group>) :
         
         fun bind(data : Group) {
             binding.ivGroupImg.setImageResource(data.groupImg)
-            binding.tvGroupName.setText(data.groupName)
+            binding.tvGroupName.text = data.groupName
 
             binding.recyclerView2.apply {
-                adapter = GroupRecyclerAdapter2(data.joinedMemberId)
+                val myAdapter = GroupRecyclerAdapter2(data.joinedMemberId)
+                adapter = myAdapter
+                myAdapter.itemClick = object : GroupRecyclerAdapter2.ItemClick {
+                    override fun onClick(view: View, position: Int) {
+
+
+                    }
+                }
             }
         }
-
     }
-
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val itemView = RecyclerviewItemGroupBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(itemView)

@@ -54,6 +54,7 @@ class GroupFragment : Fragment() {
 
             }
         }
+
     }
 
     companion object {
