@@ -15,7 +15,6 @@ class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter
     inner class Holder(val binding: RecyclerviewItemContactBinding) : RecyclerView.ViewHolder(binding.root){
         val personImg = binding.ivPersonImg
         val personName = binding.tvPersonName
-        val pemail = binding.tvPersonEmail
     }
 
     interface ItemClick {
@@ -41,7 +40,6 @@ class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter
             }
             holder.personImg.setImageResource(it.MemberImg)
             holder.personName.text = it.Name
-            holder.pemail.text = it.email
         }
     }
 }

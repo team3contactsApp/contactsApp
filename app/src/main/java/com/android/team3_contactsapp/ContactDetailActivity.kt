@@ -153,4 +153,5 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
         super.onBackPressed()
         showUpdateDialog()
     }
+
 }
