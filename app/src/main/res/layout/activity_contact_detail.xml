@@ -40,12 +40,13 @@
             app:layout_constraintStart_toEndOf="@+id/iv_back"
             app:layout_constraintTop_toTopOf="@+id/iv_back" />
 
-        <ImageView
-            android:id="@+id/iv_ctDetail_setting"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ctDetail_Clear"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginEnd="8dp"
-            tools:src="@drawable/iv_menu"
+            android:text="@string/correction"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctDetail_constraintLayout"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ctDetail_constraintLayout2"
@@ -249,8 +250,8 @@
                     android:id="@+id/iv_ctDetail_naturePic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/iv_treelevel"
                     android:adjustViewBounds="true"
+                    android:src="@drawable/iv_treelevel"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/tv_ctDetail_natureName"
                     app:layout_constraintStart_toStartOf="@+id/tv_ctDetail_natureName"
@@ -274,13 +275,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_cd_joinedGroup"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_groupNameGroup"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_ctDetail_groupNameGroup"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
