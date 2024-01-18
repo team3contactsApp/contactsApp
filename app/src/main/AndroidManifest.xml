@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Team3_contactsApp">
+        android:theme="@style/Theme.Team3_contactsApp"
+        tools:targetApi="tiramisu">
         <activity
             android:name=".GroupDetailActivity"
             android:exported="false" />

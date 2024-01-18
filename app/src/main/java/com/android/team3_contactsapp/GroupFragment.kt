@@ -11,6 +11,7 @@ import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityGroupDetailBinding
 import com.android.team3_contactsapp.databinding.ActivityMainBinding
+
 import com.android.team3_contactsapp.databinding.FragmentGroupBinding
 import com.android.team3_contactsapp.group_recycler.GroupRecyclerAdapter1
 
