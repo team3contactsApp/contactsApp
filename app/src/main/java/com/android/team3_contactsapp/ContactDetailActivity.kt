@@ -5,14 +5,19 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
 
-class ContactDetailActivity : AppCompatActivity() {
+
+class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     private lateinit var binding: ActivityContactDetailBinding
     private var member: Member? = null
 
@@ -23,9 +28,8 @@ class ContactDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         member =intent.getParcelableExtra("data",Member::class.java)
-        Log.d("test","로그가 잘 돌아왔는지 확인 ${member}")
-        val backButton: ImageView = findViewById(R.id.iv_back)
 
+        val backButton: ImageView = findViewById(R.id.iv_back)
         backButton.setOnClickListener {
             onBackPressed()
         }
@@ -35,7 +39,7 @@ class ContactDetailActivity : AppCompatActivity() {
         binding.tvCtDetailMobileNum.text = member?.myPhoneNumber
         binding.tvCtDetailNatureNum.text = member?.actCnt.toString()
         binding.tvCtDetailNatureName.text = member?.title
-        binding.tvCtDetailGroupNameGroup.text = "${member?.Name}이 가입한 모임들"
+        binding.tvCtDetailGroupNameGroup.text = "${member?.Name}님이 가입한 모임들"
 
         val btnMessage : Button = findViewById(R.id.btn_message)
         val btnCall : Button = findViewById(R.id.btn_call)
@@ -54,8 +58,85 @@ class ContactDetailActivity : AppCompatActivity() {
         val ctJoinedGroupAdapter = ContactDetailJoinedGroupAdapter(member!!.joinedGroupId)
         binding.recyclerviewCdJoinedGroup.adapter =ctJoinedGroupAdapter
         binding.recyclerviewCdJoinedGroup.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+
+        binding. ctDetailClear.setOnClickListener {
+            showUpdateDialog()
+        }
     }
 
+    private fun showUpdateDialog() {
+        val dialogView =
+            LayoutInflater.from(this).inflate(R.layout.dialog_update_info, null)
+        val nameEditText: EditText = dialogView.findViewById(R.id.editTextName)
+        val phoneNumEditText: EditText = dialogView.findViewById(R.id.editTextPhone)
+        val validationMessage: TextView = dialogView.findViewById(R.id.tvValidationMessage)
+
+        nameEditText.setText(binding.tvCtDetailName.text)
+
+        val alertDialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setTitle("정보 수정")
+            .setPositiveButton("확인", null)
+            .setNegativeButton("취소", null)
+
+        val alertDialog = alertDialogBuilder.show()
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val newName = nameEditText.text.toString()
+            val newPhoneNum = phoneNumEditText.text.toString()
+
+            if (isValidInput(newName, newPhoneNum)) {
+
+                member?.let {
+                    it.Name = newName
+                    it.myPhoneNumber = newPhoneNum
+                }
+
+                binding.tvCtDetailName.text =newName
+                binding.tvCtDetailMobileNum.text = newPhoneNum
+                binding.tvCtDetailGroupNameGroup.text = "${newName}님이 가입한 모임"
+                onUpdateInfo(newName, newPhoneNum)
+                alertDialog.dismiss()
+            } else {
+                validationMessage.text = "잘못된 입력입니다."
+                validationMessage.visibility = View.VISIBLE
+
+
+                if (!isValidName(newName)) {
+                    nameEditText.requestFocus()
+                } else if (!isValidPhoneNumber(newPhoneNum)) {
+                    phoneNumEditText.requestFocus()
+                } else {
+                    validationMessage.text = ""
+                    validationMessage.visibility = View.GONE
+                    alertDialog.dismiss()
+                }
+            }
+        }
+    }
+
+    private fun isValidInput(name: String, phoneNumber: String): Boolean {
+        return isValidName(name) && isValidPhoneNumber(phoneNumber)
+    }
+
+    private fun isValidNameOrPhoneNumber(value: String, regex: Regex): Boolean {
+        return value.isNotEmpty() && regex.matches(value)
+    }
+
+    private fun isValidName(name: String): Boolean {
+        val nameRegex = Regex("^[a-zA-Z가-힣0-9]+$")
+        return isValidNameOrPhoneNumber(name, nameRegex)
+    }
+
+    private fun isValidPhoneNumber(phoneNumber: String): Boolean {
+        val phoneNumberRegex = Regex("^[0-9]{10,11}$")
+        return isValidNameOrPhoneNumber(phoneNumber, phoneNumberRegex)
+    }
+
+    override fun onUpdateInfo(newName: String, newPhoneNum: String) {
+        binding.tvCtDetailName.text = newName
+        binding.tvCtDetailMobileNum.text = newPhoneNum
+    }
 
     private fun sendMessage(phoneNumber: String) {
         val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:$phoneNumber"))
@@ -70,5 +151,6 @@ class ContactDetailActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+        showUpdateDialog()
     }
 }
