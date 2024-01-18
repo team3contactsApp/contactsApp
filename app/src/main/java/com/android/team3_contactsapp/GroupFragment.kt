@@ -48,6 +48,7 @@ class GroupFragment : Fragment() {
         binding.rvMyGroupList.adapter = joinedGroupAdapter
         binding.rvMyGroupList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
         val groupAdapter = GroupRecyclerAdapter1(Data.group)
         binding.recyclerView1.adapter = groupAdapter
 
