@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -153,13 +154,5 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     private fun sendCall(phoneNumber: String) {
         val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
         startActivity(intent)
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }
