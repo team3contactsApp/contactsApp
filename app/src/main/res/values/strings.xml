@@ -27,7 +27,7 @@
     <string name="ctDetail_mobileNum">핸드폰 번호</string>
     <string name="ctDetail_natureNum">51</string>
     <string name="ctDetail_natureName">환경 보호가</string>
-    <string name="ctDetail_groupNameGroup">$(클릭한 사람)이 가입한 모임</string>
+    <string name="ctDetail_groupNameGroup">$(클릭한 사람)님이 가입한 모임</string>
     <string name="ctDetail_eventName">Event</string>
     <string name="ctDetail_alarmNum">10분이후 알림</string>
 </resources>
