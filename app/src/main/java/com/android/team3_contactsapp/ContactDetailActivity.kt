@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -29,9 +28,8 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
         setContentView(binding.root)
 
         member =intent.getParcelableExtra("data",Member::class.java)
-        Log.d("test","로그가 잘 돌아왔는지 확인 ${member}")
-        val backButton: ImageView = findViewById(R.id.iv_back)
 
+        val backButton: ImageView = findViewById(R.id.iv_back)
         backButton.setOnClickListener {
             onBackPressed()
         }
@@ -122,7 +120,7 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     }
 
     private fun isValidNameOrPhoneNumber(value: String, regex: Regex): Boolean {
-        return !value.isEmpty() && regex.matches(value)
+        return value.isNotEmpty() && regex.matches(value)
     }
 
     private fun isValidName(name: String): Boolean {
