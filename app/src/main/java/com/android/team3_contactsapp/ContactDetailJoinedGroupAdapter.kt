@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.team3_contactsapp.databinding.RecyclerviewItemContactDetailJoinedgroupBinding
-import com.android.team3_contactsapp.databinding.RecyclerviewItemJoinedgroupBinding
-import com.android.team3_contactsapp.databinding.RecyclerviewItemPeopleBinding
 
 
 class ContactDetailJoinedGroupAdapter(val mItems: MutableList<String>) : RecyclerView.Adapter<ContactDetailJoinedGroupAdapter.Holder>() {

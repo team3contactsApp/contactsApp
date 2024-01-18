@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.team3_contactsapp.databinding.MypageRecyclerBinding
-import com.android.team3_contactsapp.databinding.RecyclerviewItemContactBinding
 
 class MyPageAdapter (val myItems : MutableList<MyJoinedGroup>): RecyclerView.Adapter<MyPageAdapter.Holder>() {
 

@@ -7,9 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.commit
-import com.android.team3_contactsapp.databinding.ActivityGroupDetailBinding
-import com.android.team3_contactsapp.databinding.ActivityMainBinding
 import com.android.team3_contactsapp.databinding.FragmentGroupBinding
 import com.android.team3_contactsapp.group_recycler.GroupRecyclerAdapter1
 
