@@ -29,7 +29,8 @@ object Data {
         MyJoinedGroup("모임이름10",R.drawable.bokguk),
         MyJoinedGroup("모임이름11",R.drawable.bokguk),
         MyJoinedGroup("모임이름12",R.drawable.bokguk),
-        MyJoinedGroup("모임이름13",R.drawable.bokguk)
+        MyJoinedGroup("모임이름13",R.drawable.bokguk),
+        MyJoinedGroup("모임이름14",R.drawable.bokguk),
     )
 
     val group = mutableListOf(

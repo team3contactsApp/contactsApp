@@ -259,7 +259,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="290dp"
+                android:layout_height="400dp"
                 android:layout_marginTop="20dp"
                 android:background="#FFEB3B"
                 android:padding="15dp"
@@ -280,6 +280,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
                     android:layout_marginTop="12dp"
@@ -357,16 +358,26 @@
                         android:id="@+id/btn_alram"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="알람 설정하기"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:text="알람 설정하기"/>
+                        app:layout_constraintStart_toStartOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_alaramList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="가나다라마바사"
+                app:layout_constraintBottom_toBottomOf="@+id/mypage_doingActivity"
+                app:layout_constraintStart_toEndOf="@+id/mypage_doingActivity"
+                app:layout_constraintTop_toTopOf="@+id/mypage_doingActivity" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

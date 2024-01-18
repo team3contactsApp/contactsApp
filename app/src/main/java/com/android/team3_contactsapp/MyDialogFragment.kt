@@ -18,7 +18,7 @@ import com.android.team3_contactsapp.databinding.ClearDialogBinding
 import com.android.team3_contactsapp.databinding.FragmentGroupDetailBinding
 import com.android.team3_contactsapp.databinding.FragmentMypageBinding
 
-class MyDialogFragment(private val mypageFragment: MypageFragment) : DialogFragment() {
+class MyDialogFragment(val mypageFragment: MypageFragment) : DialogFragment() {
 
     private var _binding: ClearDialogBinding? = null
     private val binding get() = _binding!!

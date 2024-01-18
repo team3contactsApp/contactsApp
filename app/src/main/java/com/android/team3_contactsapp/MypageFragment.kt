@@ -36,6 +36,7 @@ class MypageFragment : Fragment() {
     private var param2: String? = null
     private var _binding: FragmentMypageBinding? = null
     private val binding get() = _binding!!
+    private val member = Data.member[0]
 
     private val initialItemCount = Data.myJoinedgroup.size
 
@@ -56,6 +57,12 @@ class MypageFragment : Fragment() {
         val view = binding.root
         val MyPageAdapter = MyPageAdapter(Data.myJoinedgroup)
 
+        binding.mypageName.text = member.Name
+        binding.mypagePhonenumber.text = member.myPhoneNumber
+        binding.mypageEmail.text = member.email
+
+
+
         //마이페이지 리사이클러뷰
         binding.mypageRecyclerView.adapter = MyPageAdapter
         binding.mypageRecyclerView.layoutManager =
@@ -71,6 +78,9 @@ class MypageFragment : Fragment() {
                     "${clickedItem.name}이 선택 되었습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                //보낸다. NotificationDialogFragment로
+
 
                 //항목 선택 시 알림 설정 Fragment 열기
                 val notifyDialogFragment = NotificationDialogFragment(this@MypageFragment)
@@ -123,10 +133,13 @@ class MypageFragment : Fragment() {
         binding.mypageName.text = name
         binding.mypagePhonenumber.text = phoneNumber
         binding.mypageEmail.text = email
-
     }
 
+    fun updateAlaramList(alaramName : String) {
+        binding.tvAlaramList.text = alaramName
+    }
     companion object {
+        var arguments: Bundle = Bundle()
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             MypageFragment().apply {
