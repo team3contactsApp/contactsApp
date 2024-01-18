@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityGroupDetailBinding
 import com.android.team3_contactsapp.databinding.ActivityMainBinding
 import com.android.team3_contactsapp.databinding.FragmentGroupBinding
@@ -43,6 +44,10 @@ class GroupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val joinedGroupAdapter = JoinedGroupAdapter(Data.myJoinedgroup)
+        binding.rvMyGroupList.adapter = joinedGroupAdapter
+        binding.rvMyGroupList.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         val groupAdapter = GroupRecyclerAdapter1(Data.group)
         binding.recyclerView1.adapter = groupAdapter
 
