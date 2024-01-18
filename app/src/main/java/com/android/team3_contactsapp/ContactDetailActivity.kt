@@ -76,8 +76,13 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
         val alertDialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
             .setTitle("정보 수정")
-            .setPositiveButton("확인", null)
-            .setNegativeButton("취소", null)
+            .setPositiveButton("확인") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+
 
         val alertDialog = alertDialogBuilder.show()
 
@@ -100,6 +105,7 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
             } else {
                 validationMessage.text = "잘못된 입력입니다."
                 validationMessage.visibility = View.VISIBLE
+                alertDialog.dismiss()
 
 
                 if (!isValidName(newName)) {
@@ -151,6 +157,9 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
 
     override fun onBackPressed() {
         super.onBackPressed()
-        showUpdateDialog()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
