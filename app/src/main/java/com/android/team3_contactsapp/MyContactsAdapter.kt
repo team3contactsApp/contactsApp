@@ -1,14 +1,11 @@
 package com.android.team3_contactsapp
 
 
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.team3_contactsapp.databinding.RecyclerviewItemContactBinding
-import com.android.team3_contactsapp.databinding.RecyclerviewItemJoinedgroupBinding
-import kotlinx.parcelize.Parcelize
 
 
 class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter<MyContactsAdapter.Holder>() {
