@@ -27,17 +27,7 @@ class GroupRecyclerAdapter1(private val dataList: MutableList<Group>) :
         fun bind(data : Group) {
             binding.ivGroupImg.setImageResource(data.groupImg)
             binding.tvGroupName.text = data.groupName
-
-            binding.recyclerView2.apply {
-                val myAdapter = GroupRecyclerAdapter2(data.joinedMemberId)
-                adapter = myAdapter
-                myAdapter.itemClick = object : GroupRecyclerAdapter2.ItemClick {
-                    override fun onClick(view: View, position: Int) {
-
-
-                    }
-                }
-            }
+            binding.tvGroupDesc.text = data.groupDesc
         }
     }
     
