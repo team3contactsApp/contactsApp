@@ -39,7 +39,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
         binding.tvCtDetailName.text = member?.Name
         binding.ivCtDetailMyPicture.setImageResource(member?.MemberImg ?: 0)
         binding.tvCtDetailMobileNum.text = member?.myPhoneNumber
-        binding.tvCtDetailNatureNum.text = member?.actCnt.toString()
         binding.tvCtDetailNatureName.text = member?.title
         binding.tvCtDetailGroupNameGroup.text = "${member?.Name}님이 가입한 모임들"
 
