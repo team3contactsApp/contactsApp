@@ -17,19 +17,19 @@ object Data {
     )
 
     val myJoinedgroup = mutableListOf(
-        MyJoinedGroup("모임이름1",R.drawable.bokguk),
-        MyJoinedGroup("모임이름2",R.drawable.bokguk),
-        MyJoinedGroup("모임이름3",R.drawable.bokguk),
-        MyJoinedGroup("모임이름4",R.drawable.bokguk),
-        MyJoinedGroup("모임이름5",R.drawable.bokguk),
-        MyJoinedGroup("모임이름6",R.drawable.bokguk),
-        MyJoinedGroup("모임이름7",R.drawable.bokguk),
-        MyJoinedGroup("모임이름8",R.drawable.bokguk),
-        MyJoinedGroup("모임이름9",R.drawable.bokguk),
-        MyJoinedGroup("모임이름10",R.drawable.bokguk),
-        MyJoinedGroup("모임이름11",R.drawable.bokguk),
-        MyJoinedGroup("모임이름12",R.drawable.bokguk),
-        MyJoinedGroup("모임이름13",R.drawable.bokguk)
+        MyJoinedGroup("모임이름1",R.drawable.bokguk, "group1"),
+        MyJoinedGroup("모임이름2",R.drawable.bokguk, "group2"),
+//        MyJoinedGroup("모임이름3",R.drawable.bokguk, "group3"),
+//        MyJoinedGroup("모임이름4",R.drawable.bokguk, "group4"),
+//        MyJoinedGroup("모임이름5",R.drawable.bokguk, "group5"),
+//        MyJoinedGroup("모임이름6",R.drawable.bokguk, "group6"),
+//        MyJoinedGroup("모임이름7",R.drawable.bokguk, "group7"),
+//        MyJoinedGroup("모임이름8",R.drawable.bokguk, "group8"),
+//        MyJoinedGroup("모임이름9",R.drawable.bokguk, "group9"),
+//        MyJoinedGroup("모임이름10",R.drawable.bokguk, "group10"),
+//        MyJoinedGroup("모임이름11",R.drawable.bokguk, "group11"),
+//        MyJoinedGroup("모임이름12",R.drawable.bokguk, "group12"),
+//        MyJoinedGroup("모임이름13",R.drawable.bokguk, "group13")
     )
 
     val group = mutableListOf(
