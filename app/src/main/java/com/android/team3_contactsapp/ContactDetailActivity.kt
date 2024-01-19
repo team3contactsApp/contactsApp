@@ -84,6 +84,8 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                     s.insert(8,"-")
                 } else if (s != null && s.length == 9 && s[8] == '-') {
                     s.delete(8, 9)
+                } else if (s != null && s.length == 4 && s[3] == '-') {
+                    s.delete(3, 4)
                 }
             }
 
