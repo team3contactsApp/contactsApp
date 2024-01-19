@@ -99,6 +99,8 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                     s.insert(8,"-")
                 } else if (s != null && s.length == 9 && s[8] == '-') {
                     s.delete(8, 9)
+                } else if (s != null && s.length == 4 && s[3] == '-') {
+                    s.delete(3, 4)
                 }
             }
 
@@ -109,7 +111,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
-
 
         val alertDialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
@@ -139,7 +140,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                 dialog.dismiss()
             }
 
-
         val alertDialog = alertDialogBuilder.show()
 
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
@@ -162,7 +162,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                 validationMessage.text = "잘못된 입력입니다."
                 validationMessage.visibility = View.VISIBLE
                 alertDialog.dismiss()
-
 
                 if (!isValidName(newName)) {
                     nameEditText.requestFocus()
