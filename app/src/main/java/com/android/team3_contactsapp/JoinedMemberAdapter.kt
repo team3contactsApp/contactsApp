@@ -1,6 +1,7 @@
 package com.android.team3_contactsapp
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,11 @@ class JoinedMemberAdapter(val mItems: MutableList<String>) : RecyclerView.Adapte
         val member = Data.member.find {
             it.memberId==mItems[position]
         }
+        Log.d("test","그룹상세페이지 멤버는 ${member}")
         member?.let {
+            holder.itemView.setOnClickListener {view ->
+                itemClick?.onClick(view,holder.adapterPosition)
+            }
             holder.pImg.setImageResource(it.MemberImg)
             holder.pName.text = it.Name
         }

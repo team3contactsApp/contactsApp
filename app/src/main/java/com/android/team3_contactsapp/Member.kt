@@ -11,6 +11,7 @@ data class Member(
     var Name: String,
     var email: String,
     var title: String,
+    var actCnt : Int,
     var myPhoneNumber: String,
     var joinedGroupId: MutableList<String>,
     var friendsPhoneNumbersId: MutableList<String>,
@@ -38,8 +39,7 @@ data class Group(
     var groupImg: Int,
     var groupName: String,
     var groupDesc: String,
-    var joinedMemberId: MutableList<String>,
-    var postsId: MutableList<String>
+    var joinedMemberId: MutableList<String>
 ) : Parcelable
 
 @Parcelize
