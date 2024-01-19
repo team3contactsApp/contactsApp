@@ -45,9 +45,7 @@ class MypageFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val MyPageAdapter = MyPageAdapter(Data.myJoinedgroup)
-
-        binding.mypageRecyclerView.adapter = MyPageAdapter
+        binding.mypageRecyclerView.adapter?.notifyDataSetChanged()
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

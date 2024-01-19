@@ -59,7 +59,7 @@ class GroupDetailActivity : AppCompatActivity() {
             }
 
             btnJoin.setOnClickListener {
-
+                showJoinDialog()
                 if (!isJoin) {
                     btnJoin.text = "가입 해제"
                     btnJoin.setBackgroundColor(R.color.black.toInt())
@@ -77,6 +77,7 @@ class GroupDetailActivity : AppCompatActivity() {
                     Data.myJoinedgroup.remove(findId)
                     isJoin = false
                 }
+
             }
 
             ivGroupDetailImg.setImageResource(group!!.groupImg)
@@ -114,7 +115,7 @@ class GroupDetailActivity : AppCompatActivity() {
         val listener = object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, which: Int) {
                 when(which) {
-                    
+
                     //DialogInterface.BUTTON_POSITIVE ->
                     //DialogInterface.BUTTON_NEGATIVE ->
                 }
@@ -123,5 +124,27 @@ class GroupDetailActivity : AppCompatActivity() {
         builder.setPositiveButton("네", listener)
         builder.setNegativeButton("아니오", listener)
         builder.show()
+    }
+
+    private fun checkJoin() {
+//        with(binding) {
+//            if (!isJoin) {
+//                btnJoin.text = "가입 해제"
+//                btnJoin.setBackgroundColor(R.color.black.toInt())
+//                Data.myJoinedgroup.add(
+//                    MyJoinedGroup(
+//                        data.groupName,
+//                        data.groupImg,
+//                        data.groupId
+//                    )
+//                )
+//                isJoin = true
+//            } else {
+//                btnJoin.text = "가입"
+//                btnJoin.setBackgroundColor(com.google.android.material.R.color.mtrl_btn_bg_color_selector.toInt())
+//                Data.myJoinedgroup.remove(findId)
+//                isJoin = false
+//            }
+//        }
     }
 }
