@@ -1,19 +1,24 @@
 package com.android.team3_contactsapp
 
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import com.android.team3_contactsapp.databinding.ActivityMainBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainActivity : AppCompatActivity(),FragmentDataListener {
+class MainActivity : AppCompatActivity(),FragmentDataListener, GroupFragmentDataListener {
 
     private lateinit var binding: ActivityMainBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,7 +32,6 @@ class MainActivity : AppCompatActivity(),FragmentDataListener {
 //        navView.setupWithNavController(navController)
 
         initViewPager()
-
     }
 
     private fun initViewPager() {
@@ -68,17 +72,8 @@ class MainActivity : AppCompatActivity(),FragmentDataListener {
         supportFragmentManager.commit {
             replace(R.id.framelayout, frag)
             setReorderingAllowed(true)
-            addToBackStack("")
+            addToBackStack(null)
         }
-    }
-
-    fun setGroupDetailFragment(data: Group) {
-        binding.tabLayout.visibility = View.INVISIBLE
-        binding.viewpager.visibility = View.INVISIBLE
-
-        val fragment = GroupDetailFragment.newInstance2(data)
-
-        setFragment(fragment)
     }
 
     override fun onDataReceived(data: Member) {
@@ -86,6 +81,12 @@ class MainActivity : AppCompatActivity(),FragmentDataListener {
         intent.putExtra("data",data)
         startActivity(intent)
         Log.d("test","여기 거처가는거냐? ${data}, ${intent}")
+    }
+
+    override fun onGroupFragDataReceived(data: Group) {
+        val intent = Intent(this, GroupDetailActivity::class.java)
+        intent.putExtra("Minyong", data)
+        startActivity(intent)
     }
 }
 

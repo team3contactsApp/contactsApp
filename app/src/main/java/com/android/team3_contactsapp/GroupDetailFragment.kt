@@ -35,9 +35,10 @@ class GroupDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.ivGroupDetailImg.setImageResource(R.drawable.person)
-        binding.tvGroupDesc.text = "설명"
-        binding.tvGroupDetailName.text = "바다 사랑단"
+        binding.ivGroupDetailImg.setImageResource(myData!!.groupImg)
+        binding.tvGroupDesc.text = myData?.groupDesc
+        binding.tvGroupDetailName.text = myData?.groupName
+
         val memberids = Data.group.find {
             it.groupId == "group1"
         }!!.joinedMemberId
