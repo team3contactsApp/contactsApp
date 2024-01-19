@@ -168,7 +168,7 @@ class MyContactsFragment : Fragment() {
     }
 
     private fun isValidPhoneNumber (num : String) : Boolean {
-        val phoneRegex = """^\d{2,3}-\d{3,4}-\d{4}${'$'}"""
+        val phoneRegex = """^\d{10,11}${'$'}"""
         val namePattern = Pattern.compile(phoneRegex)
         return namePattern.matcher(num).matches()
     }
