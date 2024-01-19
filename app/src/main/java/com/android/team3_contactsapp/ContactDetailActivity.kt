@@ -19,7 +19,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
 
-
 class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     private lateinit var binding: ActivityContactDetailBinding
     private var member: Member? = null
@@ -29,6 +28,16 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
         super.onCreate(savedInstanceState)
         binding = ActivityContactDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent?.getParcelableExtra(
+                "Minyong", Group::class.java
+            )
+        } else {
+            intent?.getParcelableExtra(
+                "Minyong"
+            )
+        }
 
         member =intent.getParcelableExtra("data",Member::class.java)
 
