@@ -11,6 +11,7 @@ data class Member(
     var Name: String,
     var email: String,
     var title: String,
+    var actCnt : Int,
     var myPhoneNumber: String,
     var joinedGroupId: MutableList<String>,
     var friendsPhoneNumbersId: MutableList<String>,

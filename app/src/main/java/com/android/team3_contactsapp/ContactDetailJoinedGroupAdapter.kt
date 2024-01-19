@@ -2,6 +2,7 @@ package com.android.team3_contactsapp
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.team3_contactsapp.databinding.RecyclerviewItemContactDetailJoinedgroupBinding
@@ -14,6 +15,10 @@ class ContactDetailJoinedGroupAdapter(val mItems: MutableList<String>) : Recycle
         val gDesc = binding.tvDetailGroupDesc
     }
 
+    interface ItemClick {
+        fun onClick(view : View, position : Int)
+    }
+    var itemClick : MyContactsAdapter.ItemClick? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = RecyclerviewItemContactDetailJoinedgroupBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return Holder(binding)
@@ -28,10 +33,12 @@ class ContactDetailJoinedGroupAdapter(val mItems: MutableList<String>) : Recycle
             it.groupId==mItems[position]
         }
         group?.let {
+            holder.itemView.setOnClickListener {view ->
+                itemClick?.onClick(view,holder.adapterPosition)
+            }
             holder.gImg.setImageResource(it.groupImg)
             holder.gName.text = it.groupName
             holder.gDesc.text = it.groupDesc
         }
-
     }
 }

@@ -118,6 +118,7 @@ class MyContactsFragment : Fragment() {
                             name.text.toString(),
                             if(email.text.isNotEmpty()) email.text.toString() else "",
                             "신규회원",
+                            0,
                             phone.text.toString(),
                             mutableListOf(),
                             mutableListOf(),
