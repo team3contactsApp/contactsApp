@@ -31,6 +31,8 @@ class MyContactsFragment : Fragment() {
 
     private var listener: FragmentDataListener? = null
 
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -138,8 +140,12 @@ class MyContactsFragment : Fragment() {
 
             }
         }//
+    }
 
+    override fun onStart() {
+        super.onStart()
 
+        binding.rvMyContactsList.adapter?.notifyDataSetChanged()
     }
 
     companion object {
@@ -152,6 +158,7 @@ class MyContactsFragment : Fragment() {
                 }
             }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
