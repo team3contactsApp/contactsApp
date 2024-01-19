@@ -33,21 +33,21 @@ object Data {
     )
 
     val group = mutableListOf(
-        Group("group1",R.drawable.person,"초록꽃청년단1","아름다운 청년들의 모임", mutableListOf("1","2","3","4","5","6"),mutableListOf("1","2","3","4","5","6")),
-        Group("group2",R.drawable.person,"초록꽃청년단2","아름다운 청년들의 모임", mutableListOf("1","2","3","4","5","6"),mutableListOf("1","2","3","4","5","6")),
-        Group("group3",R.drawable.person,"초록꽃청년단3","아름다운 청년들의 모임", mutableListOf("1","2","3","4","5","6"),mutableListOf("1","2","3","4","5","6")),
-        Group("group4",R.drawable.person,"초록꽃청년단4","아름다운 청년들의 모임", mutableListOf("1","2","3","4","5","6"),mutableListOf("1","2","3","4","5","6")),
-        Group("group5",R.drawable.person,"초록꽃청년단5","아름다운 청년들의 모임", mutableListOf("1","2","3","4","5","6"),mutableListOf("1","2","3","4","5","6")),
-        Group("group6",R.drawable.person,"초록꽃청년단6","아름다운 청년들의 모임", mutableListOf("1","2","3","4","5","6"),mutableListOf("1","2","3","4","5","6")),
-        Group("group7",R.drawable.person,"초록꽃청년단7","아름다운 청년들의 모임", mutableListOf("1","2","3","4","5","6"),mutableListOf("1","2","3","4","5","6")),
-        Group("group8",R.drawable.person,"초록꽃청년단8","아름다운 청년들의 모임", mutableListOf("1","2","3","4","5","6"),mutableListOf("1","2","3","4","5","6")),
-        Group("group9",R.drawable.person,"초록꽃청년단9","아름다운 청년들의 모임", mutableListOf("1","2","3","4","5","6"),mutableListOf("1","2","3","4","5","6")),
-        Group("group10",R.drawable.person,"초록꽃청년단10","아름다운 청년들의 모임", mutableListOf("1","2","3","4","5","6"),mutableListOf("1","2","3","4","5","6"))
+        Group("group1",R.drawable.person,"초록꽃청년단1","아름다운 청년들의 모임", mutableListOf("member1","member3","member4","member8","member9","member10")),
+        Group("group2",R.drawable.person,"초록꽃청년단2","아름다운 청년들의 모임", mutableListOf("member1","member4","member5","member7","member9","member12")),
+        Group("group3",R.drawable.person,"초록꽃청년단3","아름다운 청년들의 모임", mutableListOf("member2","member3","member5","member7","member8","member6")),
+        Group("group4",R.drawable.person,"초록꽃청년단4","아름다운 청년들의 모임", mutableListOf("member3","member4","member7","member8","member9","member11")),
+        Group("group5",R.drawable.person,"초록꽃청년단5","아름다운 청년들의 모임", mutableListOf("member2","member3","member4","member7","member9","member11")),
+        Group("group6",R.drawable.person,"초록꽃청년단6","아름다운 청년들의 모임", mutableListOf("member8","member9","member10","member11")),
+        Group("group7",R.drawable.person,"초록꽃청년단7","아름다운 청년들의 모임", mutableListOf("member6","member7","member8","member9","member10","member12")),
+        Group("group8",R.drawable.person,"초록꽃청년단8","아름다운 청년들의 모임", mutableListOf("member3","member4","member6","member8","member9","member11")),
+        Group("group9",R.drawable.person,"초록꽃청년단9","아름다운 청년들의 모임", mutableListOf("member2","member5","member9","member10","member11","member12")),
+        Group("group10",R.drawable.person,"초록꽃청년단10","아름다운 청년들의 모임", mutableListOf("member1","member2","member3","member4","member5","member6"))
     )
 
     val member = mutableListOf(
         Member("member1",R.drawable.person,"사람이름1","1234@mail.com","환경보호가",51,"010-1234-1234",
-            mutableListOf("group1","group2","group3","group4","group5"), mutableListOf("member2","member3","member4","member7","member8","member10"),mutableListOf("member2")),
+            mutableListOf("group1","group3","group4","group5","group7","group8","group9","group10"), mutableListOf("member2","member3","member4","member7","member8","member10"),mutableListOf("member2")),
         Member("member2",R.drawable.person,"사람이름2","1234@mail.com","환경보호가",51,"010-1234-1234",
             mutableListOf("group1","group2","group3","group4","group5"), mutableListOf("member2","member3","member4","member6","member7"),
             mutableListOf()

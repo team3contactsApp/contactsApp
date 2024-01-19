@@ -57,14 +57,14 @@ class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter
                     holder.personLike.setImageResource(R.drawable.heartfill)
                     holder.personLike.tag = "hearfill"
                     Data.member[0].likeIdList.add(it.memberId)
-                    Log.d("test","좋아요 리스트 추가확인 ${Data.member[0].likeIdList}")
+                    //Log.d("test","좋아요 리스트 추가확인 ${Data.member[0].likeIdList}")
                 } else {
                     holder.personLike.setImageResource(R.drawable.heart)
                     holder.personLike.tag = "heart"
                     Data.member[0].likeIdList.removeIf {str ->
                         str == it.memberId
                     }
-                    Log.d("test","좋아요 리스트 삭제확인 ${Data.member[0].likeIdList}")
+                    //Log.d("test","좋아요 리스트 삭제확인 ${Data.member[0].likeIdList}")
                 }
             }
 

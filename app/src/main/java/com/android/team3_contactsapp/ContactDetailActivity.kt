@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -63,6 +64,19 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
 
         binding. ctDetailClear.setOnClickListener {
             showUpdateDialog()
+        }
+
+        ctJoinedGroupAdapter.itemClick = object : MyContactsAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                val groupId = Data.member[0].joinedGroupId[position]
+                val data = Data.group.find {
+                    groupId == it.groupId
+                }
+                Log.d("test", "onViewCreated data =  ${data}")
+                val intent = Intent(this@ContactDetailActivity,GroupDetailActivity::class.java)
+                intent.putExtra("Minyong",data)
+                startActivity(intent)
+            }
         }
     }
 

@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(),FragmentDataListener, GroupFragmentData
         val intent = Intent(this,ContactDetailActivity::class.java)
         intent.putExtra("data",data)
         startActivity(intent)
-        Log.d("test","여기 거처가는거냐? ${data}, ${intent}")
+        //Log.d("test","여기 거처가는거냐? ${data}, ${intent}")
     }
 
     override fun onGroupFragDataReceived(data: Group) {
