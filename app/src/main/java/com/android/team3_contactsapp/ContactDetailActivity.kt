@@ -19,7 +19,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
 
-
 class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     private lateinit var binding: ActivityContactDetailBinding
     private var member: Member? = null
