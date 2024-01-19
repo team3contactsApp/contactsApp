@@ -10,7 +10,6 @@ data class Member(
     var MemberImg: Int,
     var Name: String,
     var email: String,
-    var actCnt: Int,
     var title: String,
     var myPhoneNumber: String,
     var joinedGroupId: MutableList<String>,
