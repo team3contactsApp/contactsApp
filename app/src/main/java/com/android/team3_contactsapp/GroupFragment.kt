@@ -21,6 +21,8 @@ import java.lang.RuntimeException
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+
+
 class GroupFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
@@ -58,10 +60,23 @@ class GroupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val joinedGroupAdapter = JoinedGroupAdapter(Data.myJoinedgroup)
+        val joinedGroupAdapter = JoinedGroupAdapter(Data.member[0].joinedGroupId)
         binding.rvMyGroupList.adapter = joinedGroupAdapter
         binding.rvMyGroupList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        joinedGroupAdapter.itemClick = object : JoinedGroupAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                val groupId = Data.member[0].joinedGroupId[position]
+                val data = Data.group.find {
+                    groupId == it.groupId
+                }
+                //Log.d("test", "groupfragment data =  ${data}")
+                if (data != null) {
+                    listener?.onGroupFragDataReceived(data)
+                }
+            }
+        }
 
         val groupAdapter = GroupRecyclerAdapter1(Data.group)
         binding.recyclerView1.adapter = groupAdapter
