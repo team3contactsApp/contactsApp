@@ -72,15 +72,18 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
         val phoneNumEditText: EditText = dialogView.findViewById(R.id.editTextPhone)
         val validationMessage: TextView = dialogView.findViewById(R.id.tvValidationMessage)
 
-        nameEditText.setText(binding.tvCtDetailName.text)
+        nameEditText.setText(member?.Name)
+        phoneNumEditText.setText(member?.myPhoneNumber)
 
         phoneNumEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
-                if (s != null && s.length == 3) {
-                    s.append("-")
-                } else if (s != null && s.length == 8) {
-                    s.append("-")
+                if (s != null && s.length ==4 && s[3] != '-') {
+                    s.insert(3, "-")
+                } else if (s != null && s.length ==9 && s[8] != '-') {
+                    s.insert(8,"-")
+                } else if (s != null && s.length == 9 && s[8] == '-') {
+                    s.delete(8, 9)
                 }
             }
 
@@ -97,7 +100,25 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
             .setView(dialogView)
             .setTitle("정보 수정")
             .setPositiveButton("확인") { dialog, _ ->
-                dialog.dismiss()
+                val newName = nameEditText.text.toString()
+                val newPhoneNum = phoneNumEditText.text.toString()
+
+                if (isValidInput(newName, newPhoneNum)) {
+
+                    member?.let {
+                        it.Name = newName
+                        it.myPhoneNumber = newPhoneNum
+                    }
+
+                    binding.tvCtDetailName.text = newName
+                    binding.tvCtDetailMobileNum.text = newPhoneNum
+                    binding.tvCtDetailGroupNameGroup.text = "${newName}님이 가입한 모임들"
+                    onUpdateInfo(newName, newPhoneNum)
+                    dialog.dismiss()
+                } else {
+                    validationMessage.text = "잘못된 입력입니다."
+                    validationMessage.visibility = View.VISIBLE
+                }
             }
             .setNegativeButton("취소") { dialog, _ ->
                 dialog.dismiss()
