@@ -113,7 +113,9 @@ class MyContactsFragment : Fragment() {
                 arguments = Bundle().apply {
                 }
             }
+
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

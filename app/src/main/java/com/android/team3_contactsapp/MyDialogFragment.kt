@@ -44,6 +44,9 @@ class MyDialogFragment(val mypageFragment: MypageFragment) : DialogFragment() {
                 edit2?.text.toString(),
                 edit3?.text.toString()
             )
+            val sendPhoneNumber = binding.editText
+            val sendEmail = binding.editText2
+
             dismiss()
         }
         return customView
@@ -53,4 +56,5 @@ class MyDialogFragment(val mypageFragment: MypageFragment) : DialogFragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

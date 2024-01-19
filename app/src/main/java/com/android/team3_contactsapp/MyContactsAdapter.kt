@@ -1,6 +1,7 @@
 package com.android.team3_contactsapp
 
 
+import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import kotlinx.parcelize.Parcelize
 
 
 class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter<MyContactsAdapter.Holder>() {
+    private val contactList: MutableList<Member> = mutableListOf()
     inner class Holder(val binding: RecyclerviewItemContactBinding) : RecyclerView.ViewHolder(binding.root){
         val personImg = binding.ivPersonImg
         val personName = binding.tvPersonName

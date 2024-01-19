@@ -123,6 +123,8 @@ class MypageFragment : Fragment() {
         binding.mypageClear.setOnClickListener {
             val dialogFragment = MyDialogFragment(this)
             dialogFragment.show(parentFragmentManager, "myDialog")
+
+
         }
         return view
 
@@ -139,7 +141,6 @@ class MypageFragment : Fragment() {
         binding.tvAlaramList.text = alaramName
     }
     companion object {
-        var arguments: Bundle = Bundle()
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             MypageFragment().apply {
@@ -149,6 +150,4 @@ class MypageFragment : Fragment() {
                 }
             }
     }
-
-
 }
