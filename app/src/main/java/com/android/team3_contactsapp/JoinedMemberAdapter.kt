@@ -2,12 +2,21 @@ package com.android.team3_contactsapp
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.team3_contactsapp.databinding.RecyclerviewItemPeopleBinding
+import com.android.team3_contactsapp.group_recycler.GroupRecyclerAdapter1
 
 
 class JoinedMemberAdapter(val mItems: MutableList<String>) : RecyclerView.Adapter<JoinedMemberAdapter.Holder>() {
+
+    interface ItemClick {
+        fun onClick(view: View, position: Int)
+    }
+
+    var itemClick : ItemClick? = null
+
     inner class Holder(val binding: RecyclerviewItemPeopleBinding) : RecyclerView.ViewHolder(binding.root){
         val pImg = binding.ivPersonImg
         val pName = binding.tvPersonName
