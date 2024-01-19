@@ -36,7 +36,7 @@ class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter
         //Log.d("Test","member는 ${member} ")
         member?.let {
             holder.itemView.setOnClickListener {view ->
-                itemClick?.onClick(view,position)
+                itemClick?.onClick(view,holder.adapterPosition)
             }
             //Log.d("Test","리스트와 아이디는  ${it.likeIdList} , ${it.memberId} ")
             if( Data.member[0].likeIdList.contains(it.memberId)){

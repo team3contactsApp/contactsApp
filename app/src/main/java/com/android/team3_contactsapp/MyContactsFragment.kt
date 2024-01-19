@@ -112,7 +112,6 @@ class MyContactsFragment : Fragment() {
                             R.drawable.person,
                             name.text.toString(),
                             if(email.text.isNotEmpty()) email.text.toString() else "",
-                            0,
                             "신규회원",
                             phone.text.toString(),
                             mutableListOf(),
