@@ -97,7 +97,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
             }
         })
 
-
         val alertDialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
             .setTitle("정보 수정")
