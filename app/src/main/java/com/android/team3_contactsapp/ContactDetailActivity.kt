@@ -125,7 +125,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                 dialog.dismiss()
             }
 
-
         val alertDialog = alertDialogBuilder.show()
 
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
@@ -148,7 +147,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                 validationMessage.text = "잘못된 입력입니다."
                 validationMessage.visibility = View.VISIBLE
                 alertDialog.dismiss()
-
 
                 if (!isValidName(newName)) {
                     nameEditText.requestFocus()
