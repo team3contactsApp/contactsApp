@@ -147,10 +147,12 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
             val newPhoneNum = phoneNumEditText.text.toString()
 
             if (isValidInput(newName, newPhoneNum)) {
-
-                member?.let {
-                    it.Name = newName
-                    it.myPhoneNumber = newPhoneNum
+                //
+                Data.member.find {
+                    it.memberId == member?.memberId
+                }!!.let{ it2 ->
+                    it2.Name = newName
+                    it2.myPhoneNumber = newPhoneNum
                 }
 
                 binding.tvCtDetailName.text =newName
@@ -161,7 +163,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
             } else {
                 validationMessage.text = "잘못된 입력입니다."
                 validationMessage.visibility = View.VISIBLE
-                alertDialog.dismiss()
 
                 if (!isValidName(newName)) {
                     nameEditText.requestFocus()
