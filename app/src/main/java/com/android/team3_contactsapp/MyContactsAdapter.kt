@@ -33,12 +33,14 @@ class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter
         val member = Data.member.find {
             it.memberId==mItems[position]
         }
-        //Log.d("Test","member는 ${member} ")
+        //Log.d("test","member는 ${member} ")
         member?.let {
+            //Log.d("test","let 안에 있는 member는 ${it} ")
             holder.itemView.setOnClickListener {view ->
                 itemClick?.onClick(view,holder.adapterPosition)
+                Log.d("test","11adapterposioin  ${holder.adapterPosition} ")
             }
-            //Log.d("Test","리스트와 아이디는  ${it.likeIdList} , ${it.memberId} ")
+
             if( Data.member[0].likeIdList.contains(it.memberId)){
                 holder.personLike.setImageResource(R.drawable.heartfill)
                 holder.personLike.tag = "hearfill"
