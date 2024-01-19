@@ -43,12 +43,6 @@ class MypageFragment : Fragment() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        val MyPageAdapter = MyPageAdapter(Data.myJoinedgroup)
-
-        binding.mypageRecyclerView.adapter = MyPageAdapter
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
