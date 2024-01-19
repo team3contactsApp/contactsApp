@@ -1,6 +1,5 @@
 package com.android.team3_contactsapp
 
-import android.app.AlarmManager
 import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -11,21 +10,16 @@ import android.icu.text.Transliterator.Position
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
-import android.os.SystemClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.DialogFragment
 import com.android.team3_contactsapp.Data.myJoinedgroup
 import com.android.team3_contactsapp.MypageFragment
 import com.android.team3_contactsapp.databinding.NotificationDialogBinding
-import java.util.Calendar
 import com.android.team3_contactsapp.MypageFragment as MypageFragment1
+
 
 @Suppress("DEPRECATION")
 class NotificationDialogFragment(private val mypageFragment: MypageFragment ) : DialogFragment() {

@@ -5,6 +5,8 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -73,11 +75,35 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
 
         nameEditText.setText(binding.tvCtDetailName.text)
 
+        phoneNumEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+                if (s != null && s.length == 3) {
+                    s.append("-")
+                } else if (s != null && s.length == 8) {
+                    s.append("-")
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+
+
         val alertDialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
             .setTitle("정보 수정")
-            .setPositiveButton("확인", null)
-            .setNegativeButton("취소", null)
+            .setPositiveButton("확인") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+
 
         val alertDialog = alertDialogBuilder.show()
 
@@ -100,6 +126,7 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
             } else {
                 validationMessage.text = "잘못된 입력입니다."
                 validationMessage.visibility = View.VISIBLE
+                alertDialog.dismiss()
 
 
                 if (!isValidName(newName)) {
@@ -129,8 +156,8 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     }
 
     private fun isValidPhoneNumber(phoneNumber: String): Boolean {
-        val phoneNumberRegex = Regex("^[0-9]{10,11}$")
-        return isValidNameOrPhoneNumber(phoneNumber, phoneNumberRegex)
+        val phoneNumberRegex = Regex("^(010|011)-[0-9]{3,4}-[0-9]{4}$")
+        return phoneNumber.matches(phoneNumberRegex)
     }
 
     override fun onUpdateInfo(newName: String, newPhoneNum: String) {
@@ -147,10 +174,5 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     private fun sendCall(phoneNumber: String) {
         val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
         startActivity(intent)
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        showUpdateDialog()
     }
 }

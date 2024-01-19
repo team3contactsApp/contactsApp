@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityGroupDetailBinding
-import com.android.team3_contactsapp.databinding.ActivityMainBinding
 
 class GroupDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGroupDetailBinding
