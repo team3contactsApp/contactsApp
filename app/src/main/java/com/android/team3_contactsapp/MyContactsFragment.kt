@@ -59,9 +59,14 @@ class MyContactsFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         myContactsAdapter.itemClick = object : MyContactsAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-                val data = Data.member[position]
+                val id = Data.member[0].friendsPhoneNumbersId[position]
+                val data = Data.member.find {
+                    id == it.memberId
+                }
                 Log.d("test", "onViewCreated data =  ${data}")
-                listener?.onDataReceived(data)
+                if (data != null) {
+                    listener?.onDataReceived(data)
+                }
             }
         }
 
