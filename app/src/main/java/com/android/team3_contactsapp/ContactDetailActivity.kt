@@ -29,16 +29,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
         binding = ActivityContactDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent?.getParcelableExtra(
-                "Minyong", Group::class.java
-            )
-        } else {
-            intent?.getParcelableExtra(
-                "Minyong"
-            )
-        }
-
         member =intent.getParcelableExtra("data",Member::class.java)
 
         val backButton: ImageView = findViewById(R.id.iv_back)
