@@ -154,13 +154,4 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
         val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
         startActivity(intent)
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
 }
