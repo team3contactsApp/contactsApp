@@ -28,7 +28,8 @@ data class MyContacts(
 @Parcelize
 data class MyJoinedGroup(
     var name : String,
-    var img : Int
+    var img : Int,
+    var groupId : String ?= null
 ) : Parcelable
 
 @Parcelize
