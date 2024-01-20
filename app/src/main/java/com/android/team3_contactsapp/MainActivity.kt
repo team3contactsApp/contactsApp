@@ -12,6 +12,7 @@ import com.android.team3_contactsapp.databinding.ActivityMainBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity(),FragmentDataListener, GroupFragmentDataListener {
@@ -25,18 +26,17 @@ class MainActivity : AppCompatActivity(),FragmentDataListener, GroupFragmentData
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val navView: BottomNavigationView = binding.navView
-//
-//        val navController = findNavController(R.id.nav_host_fragment_activity_my_contacts)
-//
-//        navView.setupWithNavController(navController)
-
         initViewPager()
     }
 
     private fun initViewPager() {
+        val bundle = Bundle()
+        bundle.putParcelable("key", Data.member[0])
+        val myContactsFragment = MyContactsFragment.newInstance(bundle)
+
         val viewPagerAdapter = ViewPagerAdapter(this)
-        viewPagerAdapter.addFragment(MyContactsFragment())
+
+        viewPagerAdapter.addFragment(myContactsFragment)
         viewPagerAdapter.addFragment(GroupFragment())
         viewPagerAdapter.addFragment(MypageFragment())
 
@@ -66,19 +66,35 @@ class MainActivity : AppCompatActivity(),FragmentDataListener, GroupFragmentData
                 }
             }
         }.attach()
+
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab?.position) {
+                    0 -> {
+
+                    }
+                    1 -> Log.i("Minyong", "tab2")
+                    2 -> Log.i("Minyong", "tab3")
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+
+        })
     }
 
-    private fun setFragment(frag: Fragment) {
-        supportFragmentManager.commit {
-            replace(R.id.framelayout, frag)
-            setReorderingAllowed(true)
-            addToBackStack(null)
-        }
-    }
 
-    override fun onDataReceived(data: Member) {
+    override fun onDataReceived(data: Bundle) {
         val intent = Intent(this,ContactDetailActivity::class.java)
-        intent.putExtra("data",data)
+        val bundle = data.getBundle("key")
+        intent.putExtra("data", data)
         startActivity(intent)
         //Log.d("test","여기 거처가는거냐? ${data}, ${intent}")
     }

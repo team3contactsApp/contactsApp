@@ -22,7 +22,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 interface FragmentDataListener {
-    fun onDataReceived(data: Member)
+    fun onDataReceived(data: Bundle)
 }
 
 class MyContactsFragment : Fragment() {
@@ -31,8 +31,7 @@ class MyContactsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var listener: FragmentDataListener? = null
-
-
+    private var param1: Member ?= null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,6 +43,13 @@ class MyContactsFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getBundle(ARG_PARAM1)?.getParcelable("key")
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,7 +57,6 @@ class MyContactsFragment : Fragment() {
         _binding = FragmentMyContactsBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,13 +68,19 @@ class MyContactsFragment : Fragment() {
 
         myContactsAdapter.itemClick = object : MyContactsAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
+
+                val bundle = Bundle()
+
                 val id = Data.member[0].friendsPhoneNumbersId[position]
                 val data = Data.member.find {
                     id == it.memberId
                 }
                 //Log.d("test", "onViewCreated data =  ${data}")
+
+                bundle.putParcelable("key", data)
+
                 if (data != null) {
-                    listener?.onDataReceived(data)
+                    listener?.onDataReceived(bundle)
                 }
             }
         }
@@ -150,7 +161,7 @@ class MyContactsFragment : Fragment() {
                             mutableListOf()
                         )
                     )
-                    Data.member[0].friendsPhoneNumbersId.add(id)
+                    param1!!.friendsPhoneNumbersId.add(id)
                     Log.d("test","추가됨 ${name.text}, ${email.text}, ${phone.text} .${Data.member[0].friendsPhoneNumbersId}")
 
                 }
@@ -172,12 +183,11 @@ class MyContactsFragment : Fragment() {
     }
 
     companion object {
-
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(data: Bundle) =
             MyContactsFragment().apply {
                 arguments = Bundle().apply {
-
+                    putBundle(ARG_PARAM1, data)
                 }
             }
 
