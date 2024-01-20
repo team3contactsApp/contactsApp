@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.team3_contactsapp.databinding.MypageRecyclerBinding
 
-class MyPageAdapter (val myItems : MutableList<MyJoinedGroup>): RecyclerView.Adapter<MyPageAdapter.Holder>() {
+class MyPageAdapter (val myItems : MutableList<String>): RecyclerView.Adapter<MyPageAdapter.Holder>() {
 
 
     interface ItemClick{
@@ -21,13 +21,16 @@ class MyPageAdapter (val myItems : MutableList<MyJoinedGroup>): RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: Holder ,position: Int) {
-
+        val group = Data.group.find {
+            it.groupId==myItems[position]
+        }
         holder.itemView.setOnClickListener {  //클릭이벤트추가부분
             itemClick?.onClick(it, position)
         }
-
-        holder.mpImage.setImageResource(myItems[position].img)
-        holder.mpName.text = myItems[position].name
+        group?.let {
+            holder.mpImage.setImageResource(it.groupImg)
+            holder.mpName.text = it.groupName
+        }
     }
 
     override fun getItemCount(): Int {

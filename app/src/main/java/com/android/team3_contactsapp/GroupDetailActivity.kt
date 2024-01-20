@@ -70,13 +70,11 @@ class GroupDetailActivity : AppCompatActivity() {
                     val draw = getDrawable(R.drawable.btn_mycontact_detail_unactivate)
                     btnJoin.setBackgroundDrawable(draw)
 
-                    Data.myJoinedgroup.add(
-                        MyJoinedGroup(
-                            data.groupName,
-                            data.groupImg,
-                            data.groupId
+                    group?.let { it1 ->
+                        Data.member[0].joinedGroupId.add(
+                            it1.groupId
                         )
-                    )
+                    }
                     isJoin = true
                 } else {
                     btnJoin.text = "가입"

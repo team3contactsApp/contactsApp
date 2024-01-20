@@ -55,7 +55,7 @@ class MypageFragment : Fragment() {
     ): View? {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
         val view = binding.root
-        val MyPageAdapter = MyPageAdapter(Data.myJoinedgroup)
+        val MyPageAdapter = MyPageAdapter(Data.member[0].joinedGroupId)
 
         binding.mypageName.text = member.Name
         binding.mypagePhonenumber.text = member.myPhoneNumber
