@@ -123,13 +123,13 @@ class MyContactsFragment : Fragment() {
                 val email = view.findViewById<EditText>(R.id.et_dialog_email)
 
                 if(name.text.isEmpty() || !isValidname(name.text.toString())){
-                    validationMessage.text = "이름이 유효하지 않습니다."
+                    validationMessage.text = "이름이 잘못되었습니다."
                     return@setOnClickListener
                 } else if(phone.text.isEmpty() || !isValidPhoneNumber(phone.text.toString())){
-                    validationMessage.text ="번호가 유효하지 않습니다"
+                    validationMessage.text ="번호가 잘못되었습니다"
                     return@setOnClickListener
                 } else if(!isValidEmail(email.text.toString())){
-                    validationMessage.text = "메일이 유효하지 않습니다."
+                    validationMessage.text = "메일이 잘못되었습니다."
                     return@setOnClickListener
                 }
 
