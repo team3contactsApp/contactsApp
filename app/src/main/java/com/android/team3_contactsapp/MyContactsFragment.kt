@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -115,6 +117,32 @@ class MyContactsFragment : Fragment() {
 
             var view = layoutInflater.inflate(R.layout.dialog_addcontact, null)
             builder.setView(view)
+            val validationMessage: TextView = view.findViewById(R.id.tvValidationMessage)
+            val name = view.findViewById<EditText>(R.id.et_dialog_name)
+            val phone : EditText = view.findViewById(R.id.et_dialog_phone)
+            val email = view.findViewById<EditText>(R.id.et_dialog_email)
+
+            phone.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+
+                    if (s != null && s.length ==4 && s[3] != '-') {
+                        s.insert(3, "-")
+                    } else if (s != null && s.length ==9 && s[8] != '-') {
+                        s.insert(8,"-")
+                    } else if (s != null && s.length == 9 && s[8] == '-') {
+                        s.delete(8, 9)
+                    } else if (s != null && s.length == 4 && s[3] == '-') {
+                        s.delete(3, 4)
+                    }
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+            })
 
             var listener = DialogInterface.OnClickListener { p0, p1 ->
                 }
@@ -128,10 +156,10 @@ class MyContactsFragment : Fragment() {
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {p0 ->
                 var closeDialog = false
                 //val alert = p0 as AlertDialog
-                val validationMessage: TextView = view.findViewById(R.id.tvValidationMessage)
-                val name = view.findViewById<EditText>(R.id.et_dialog_name)
-                val phone = view.findViewById<EditText>(R.id.et_dialog_phone)
-                val email = view.findViewById<EditText>(R.id.et_dialog_email)
+
+
+
+
 
                 if(name.text.isEmpty() || !isValidname(name.text.toString())){
                     validationMessage.text = "이름이 잘못되었습니다."
@@ -213,10 +241,9 @@ class MyContactsFragment : Fragment() {
         return namePattern.matcher(name).matches()
     }
 
-    private fun isValidPhoneNumber (num : String) : Boolean {
-        val phoneRegex = """^\d{10,11}${'$'}"""
-        val namePattern = Pattern.compile(phoneRegex)
-        return namePattern.matcher(num).matches()
+    private fun isValidPhoneNumber(phoneNumber: String): Boolean {
+        val phoneNumberRegex = Regex("^(010|011)-[0-9]{3,4}-[0-9]{4}$")
+        return phoneNumber.matches(phoneNumberRegex)
     }
 
     private fun isValidEmail (email : String) : Boolean {
