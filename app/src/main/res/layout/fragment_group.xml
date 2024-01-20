@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GroupFragment"
-    android:background="#2F4F4F">
+    tools:context=".GroupFragment">
 
 
     <LinearLayout
         android:id="@+id/layout_topmenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#253C3C"
+        android:background="#0D4B34"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="모임 그룹 페이지"
+            android:text="@string/group_actionbarName"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -32,9 +31,10 @@
         android:id="@+id/tv_joinedGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="내가 가입한 그룹"
+        android:text="@string/group_joinedGroup"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:padding="10dp"
         app:layout_constraintTop_toBottomOf="@+id/layout_topmenu" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -59,6 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:padding="10dp"
         app:layout_constraintTop_toBottomOf="@id/rv_myGroupList"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +67,7 @@
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:text="모집 그룹"/>
+        android:text="@string/group_cruit"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view1"

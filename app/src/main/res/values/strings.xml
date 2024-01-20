@@ -43,4 +43,9 @@
     <string name="Mypage_phoneNumber">01012341234</string>
     <string name="Mypage_email">123@gmail.com</string>
     <string name="Mypage_name">사람이름1</string>
+    <string name="mycontact_actionbar">내 연락처</string>
+    <string name="group_actionbarName">모임 그룹 페이지</string>
+    <string name="group_joinedGroup">내가 가입한 그룹</string>
+    <string name="group_cruit">모집 그룹</string>
+    <string name="mypage_actionbarName">마이페이지</string>
 </resources>

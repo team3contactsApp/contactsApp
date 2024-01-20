@@ -11,7 +11,7 @@
         android:id="@+id/mypage_toptap"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#AEF8A7"
+        android:background="#0D4B34"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
@@ -20,8 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:text="마이페이지"
-            android:textColor="@color/black"
+            android:text="@string/mypage_actionbarName"
+            android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +33,7 @@
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
             android:text="@string/correction"
+            android:background="@drawable/btn_info_modify"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
