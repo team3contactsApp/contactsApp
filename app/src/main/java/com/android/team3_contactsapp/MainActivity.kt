@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(),FragmentDataListener, GroupFragmentData
 
     private fun initViewPager() {
         val bundle = Bundle()
-        //bundle.putByte("key", Data.member)
+        bundle.putParcelable("key", Data.member[0])
         val myContactsFragment = MyContactsFragment.newInstance(bundle)
 
         val viewPagerAdapter = ViewPagerAdapter(this)
@@ -91,9 +91,10 @@ class MainActivity : AppCompatActivity(),FragmentDataListener, GroupFragmentData
     }
 
 
-    override fun onDataReceived(data: Member) {
+    override fun onDataReceived(data: Bundle) {
         val intent = Intent(this,ContactDetailActivity::class.java)
-        intent.putExtra("data",data)
+        val bundle = data.getBundle("key")
+        intent.putExtra("data", data)
         startActivity(intent)
         //Log.d("test","여기 거처가는거냐? ${data}, ${intent}")
     }
