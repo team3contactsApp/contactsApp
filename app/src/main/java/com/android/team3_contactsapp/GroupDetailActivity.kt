@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TableLayout
 import androidx.annotation.RequiresApi
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityGroupDetailBinding
@@ -57,6 +58,7 @@ class GroupDetailActivity : AppCompatActivity() {
             } else {
                 isJoin = false
                 btnJoin.text = "가입"
+                btnJoin.setBackgroundColor(R.color.green.toInt())
             }
 
             btnJoin.setOnClickListener {
@@ -74,7 +76,7 @@ class GroupDetailActivity : AppCompatActivity() {
                     isJoin = true
                 } else {
                     btnJoin.text = "가입"
-                    btnJoin.setBackgroundColor(com.google.android.material.R.color.mtrl_btn_bg_color_selector.toInt())
+                    btnJoin.setBackgroundColor(R.color.green.toInt())
                     Data.myJoinedgroup.remove(findId)
                     isJoin = false
                 }

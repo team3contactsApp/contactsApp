@@ -10,7 +10,7 @@
         android:id="@+id/layout_"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#AEF8A7"
+        android:background="#0D4B34"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +19,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="내 연락처"
+            android:text="@string/mycontact_actionbar"
+            android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -43,7 +44,8 @@
         android:layout_marginBottom="15dp"
         android:src="@drawable/plus"
         app:layout_constraintBottom_toTopOf="@+id/iv_float"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <ImageView
         android:id="@+id/iv_float"
