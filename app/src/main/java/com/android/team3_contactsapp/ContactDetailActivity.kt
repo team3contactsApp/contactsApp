@@ -154,6 +154,9 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                     validationMessage.visibility = View.VISIBLE
                 }
             }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
 
         val alertDialog = alertDialogBuilder.show()
 
