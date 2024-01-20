@@ -180,6 +180,7 @@ class MyContactsFragment : Fragment() {
 
                 }
             }
+
     }
 
 
