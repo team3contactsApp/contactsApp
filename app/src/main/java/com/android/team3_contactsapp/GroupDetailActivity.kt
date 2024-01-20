@@ -48,14 +48,15 @@ class GroupDetailActivity : AppCompatActivity() {
             tvGroupDetailName.text = data.groupName
             tvGroupDesc.text = data.groupDesc
 
-            val findId = Data.myJoinedgroup.find {
-                data.groupId == it.groupId
+            val findId = Data.member[0].joinedGroupId.find {
+                group?.groupId  == it
             }
 
             if (findId != null) {
                 isJoin = true
                 btnJoin.text = "가입 해제"
-                btnJoin.setBackgroundColor(R.color.black.toInt())
+                val draw = getDrawable(R.drawable.btn_mycontact_detail_unactivate)
+                btnJoin.setBackgroundDrawable(draw)
             } else {
                 isJoin = false
                 btnJoin.text = "가입"
@@ -65,7 +66,9 @@ class GroupDetailActivity : AppCompatActivity() {
                 //showJoinDialog()
                 if (!isJoin) {
                     btnJoin.text = "가입 해제"
-                    btnJoin.setBackgroundColor(R.color.black.toInt())
+                    //btnJoin.setBackgroundColor(R.color.black.toInt())
+                    val draw = getDrawable(R.drawable.btn_mycontact_detail_unactivate)
+                    btnJoin.setBackgroundDrawable(draw)
 
                     Data.myJoinedgroup.add(
                         MyJoinedGroup(
@@ -79,7 +82,10 @@ class GroupDetailActivity : AppCompatActivity() {
                     btnJoin.text = "가입"
                     val draw = getDrawable(R.drawable.btn_mycontact_detail)
                     btnJoin.setBackgroundDrawable(draw)
-                    Data.myJoinedgroup.remove(findId)
+                    Data.member[0].joinedGroupId.remove(findId)
+                    Data.group.find {
+                        it.groupId == group?.groupId
+                    }?.joinedMemberId?.remove(Data.member[0].memberId)
                     isJoin = false
                 }
 
@@ -112,6 +118,7 @@ class GroupDetailActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun showJoinDialog() {
 
