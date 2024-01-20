@@ -52,4 +52,6 @@
     <string name="mpdialog_errorName">이름이 잘못 입력 되었습니다.</string>
     <string name="mpdialog_errorPhoneNumber">번호는 숫자만 입력 가능합니다.</string>
     <string name="mpdialog_errorEmail">이메일은 aaa@aaa.aaa로 입력해주세요</string>
+    <string name="mycontact_grid_view">grid view</string>
+    <string name="mycontact_list_view">list view</string>
 </resources>
