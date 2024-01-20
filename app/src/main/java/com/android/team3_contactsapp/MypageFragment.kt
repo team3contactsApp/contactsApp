@@ -42,7 +42,7 @@ class MypageFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-    
+
     override fun onStart() {
         super.onStart()
         binding.mypageRecyclerView.adapter?.notifyDataSetChanged()

@@ -59,7 +59,7 @@ class GroupDetailActivity : AppCompatActivity() {
             }
 
             btnJoin.setOnClickListener {
-                showJoinDialog()
+                //showJoinDialog()
                 if (!isJoin) {
                     btnJoin.text = "가입 해제"
                     btnJoin.setBackgroundColor(R.color.black.toInt())

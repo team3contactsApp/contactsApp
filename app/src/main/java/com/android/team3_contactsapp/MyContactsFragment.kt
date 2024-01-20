@@ -30,7 +30,7 @@ class MyContactsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var listener: FragmentDataListener? = null
-
+    private var param1: Data? = null
 
 
     override fun onAttach(context: Context) {
@@ -149,12 +149,11 @@ class MyContactsFragment : Fragment() {
     }
 
     companion object {
-
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(data: Bundle) =
             MyContactsFragment().apply {
                 arguments = Bundle().apply {
-
+                    putBundle(ARG_PARAM1, data)
                 }
             }
     }
