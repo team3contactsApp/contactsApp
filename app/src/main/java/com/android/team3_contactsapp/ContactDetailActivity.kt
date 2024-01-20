@@ -134,6 +134,24 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                     binding.tvCtDetailGroupNameGroup.text = "${newName}님이 가입한 모임들"
                     onUpdateInfo(newName, newPhoneNum)
                     dialog.dismiss()
+                } else {
+                    var validationError = ""
+
+                    if (!isNameValid) {
+                        validationError += "이름이 잘못되었습니다."
+                        nameEditText.requestFocus()
+                    }
+
+                    if (!isPhoneNumValid) {
+                        if (validationError.isNotEmpty()) {
+                            validationError += "\n"
+                        }
+                        validationError += "번호가 잘못되었습니다."
+                        phoneNumEditText.requestFocus()
+                    }
+
+                    validationMessage.text = validationError
+                    validationMessage.visibility = View.VISIBLE
                 }
             }
 
@@ -144,15 +162,14 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
             val newPhoneNum = phoneNumEditText.text.toString()
 
             if (isValidInput(newName, newPhoneNum)) {
-                //
                 Data.member.find {
                     it.memberId == member?.memberId
-                }!!.let{ it2 ->
+                }?.let { it2 ->
                     it2.Name = newName
                     it2.myPhoneNumber = newPhoneNum
                 }
 
-                binding.tvCtDetailName.text =newName
+                binding.tvCtDetailName.text = newName
                 binding.tvCtDetailMobileNum.text = newPhoneNum
                 binding.tvCtDetailGroupNameGroup.text = "${newName}님이 가입한 모임"
                 onUpdateInfo(newName, newPhoneNum)
@@ -166,14 +183,15 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                 }
 
                 if (!isValidPhoneNumber(newPhoneNum)) {
+                    if (validationError.isNotEmpty()) {
+                        validationError += "\n"
+                    }
                     validationError += "번호가 잘못되었습니다."
                     phoneNumEditText.requestFocus()
                 }
 
-                if (validationError.isEmpty()) {
-                    validationMessage.visibility = View.GONE
-                    alertDialog.dismiss()
-                }
+                validationMessage.text = validationError
+                validationMessage.visibility = View.VISIBLE
             }
         }
     }
