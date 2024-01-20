@@ -134,23 +134,7 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                     binding.tvCtDetailGroupNameGroup.text = "${newName}님이 가입한 모임들"
                     onUpdateInfo(newName, newPhoneNum)
                     dialog.dismiss()
-                } else {
-                    var validationError = ""
-
-                    if (!isNameValid) {
-                        validationError = "이름이 잘못되었습니다."
-                        nameEditText.requestFocus()
-                    } else if (!isPhoneNumValid) {
-                        validationError = "번호가 잘못되었습니다."
-                        phoneNumEditText.requestFocus()
-                    }
-
-                    validationMessage.text = validationError
-                    validationMessage.visibility = View.VISIBLE
                 }
-            }
-            .setNegativeButton("취소") { dialog, _ ->
-                dialog.dismiss()
             }
 
         val alertDialog = alertDialogBuilder.show()
@@ -185,9 +169,6 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                     validationError += "번호가 잘못되었습니다."
                     phoneNumEditText.requestFocus()
                 }
-
-                validationMessage.text = validationError.trim()
-                validationMessage.visibility = View.VISIBLE
 
                 if (validationError.isEmpty()) {
                     validationMessage.visibility = View.GONE
