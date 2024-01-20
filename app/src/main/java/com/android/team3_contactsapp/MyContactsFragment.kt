@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -59,16 +60,38 @@ class MyContactsFragment : Fragment() {
         binding.rvMyContactsList.adapter = myContactsAdapter
         binding.rvMyContactsList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
         myContactsAdapter.itemClick = object : MyContactsAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
                 val id = Data.member[0].friendsPhoneNumbersId[position]
                 val data = Data.member.find {
                     id == it.memberId
                 }
-                Log.d("test", "onViewCreated data =  ${data}")
+                //Log.d("test", "onViewCreated data =  ${data}")
                 if (data != null) {
                     listener?.onDataReceived(data)
                 }
+            }
+        }
+
+        myContactsAdapter.itemLongClick = object : MyContactsAdapter.ItemLongClick {
+            override fun onLongClick(view: View, position: Int) {
+                val ad = androidx.appcompat.app.AlertDialog.Builder(context!!)
+                ad.setMessage("연락처를 삭제하시겠습니까?")
+                ad.setPositiveButton("확인") { dialog, _ ->
+                    val id = Data.member[0].friendsPhoneNumbersId[position]
+                    val member = Data.member.find {
+                        id == it.memberId
+                    }
+                    Log.d("test", "롱클릭 멤버 =  ${member}")
+                    Data.member[0].friendsPhoneNumbersId.removeAt(position)
+                    myContactsAdapter.notifyItemRemoved(position)
+                    dialog.dismiss()
+                }
+                ad.setNegativeButton("취소"){ dialog,_ ->
+                    dialog.dismiss()
+                }
+                ad.show()
             }
         }
 
@@ -94,19 +117,19 @@ class MyContactsFragment : Fragment() {
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {p0 ->
                 var closeDialog = false
                 //val alert = p0 as AlertDialog
+                val validationMessage: TextView = view.findViewById(R.id.tvValidationMessage)
                 val name = view.findViewById<EditText>(R.id.et_dialog_name)
                 val phone = view.findViewById<EditText>(R.id.et_dialog_phone)
                 val email = view.findViewById<EditText>(R.id.et_dialog_email)
 
                 if(name.text.isEmpty() || !isValidname(name.text.toString())){
-                    Toast.makeText(context,"이름이 유효하지 않습니다.", Toast.LENGTH_SHORT).show()
-                    Log.d("test", "이름칸 ${name.text}")
+                    validationMessage.text = "이름이 유효하지 않습니다."
                     return@setOnClickListener
                 } else if(phone.text.isEmpty() || !isValidPhoneNumber(phone.text.toString())){
-                    Toast.makeText(context, "번호가 유효하지 않습니다", Toast.LENGTH_SHORT).show()
+                    validationMessage.text ="번호가 유효하지 않습니다"
                     return@setOnClickListener
                 } else if(!isValidEmail(email.text.toString())){
-                    Toast.makeText(context, "메일이 유효하지 않습니다.", Toast.LENGTH_SHORT).show()
+                    validationMessage.text = "메일이 유효하지 않습니다."
                     return@setOnClickListener
                 }
 
