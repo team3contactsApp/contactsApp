@@ -15,6 +15,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:id="@+id/mypage_joinedGroupImg"
+            android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
     </androidx.cardview.widget.CardView>

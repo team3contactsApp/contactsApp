@@ -19,6 +19,7 @@
             android:id="@+id/iv_detailGroupPic"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
     </androidx.cardview.widget.CardView>
