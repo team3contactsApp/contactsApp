@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TableLayout
 import androidx.annotation.RequiresApi
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,7 +59,6 @@ class GroupDetailActivity : AppCompatActivity() {
             } else {
                 isJoin = false
                 btnJoin.text = "가입"
-                btnJoin.setBackgroundColor(R.color.green.toInt())
             }
 
             btnJoin.setOnClickListener {
@@ -66,6 +66,7 @@ class GroupDetailActivity : AppCompatActivity() {
                 if (!isJoin) {
                     btnJoin.text = "가입 해제"
                     btnJoin.setBackgroundColor(R.color.black.toInt())
+
                     Data.myJoinedgroup.add(
                         MyJoinedGroup(
                             data.groupName,
@@ -76,7 +77,8 @@ class GroupDetailActivity : AppCompatActivity() {
                     isJoin = true
                 } else {
                     btnJoin.text = "가입"
-                    btnJoin.setBackgroundColor(R.color.green.toInt())
+                    val draw = getDrawable(R.drawable.btn_mycontact_detail)
+                    btnJoin.setBackgroundDrawable(draw)
                     Data.myJoinedgroup.remove(findId)
                     isJoin = false
                 }
