@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:text="@string/seedName"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/seedImage"
             app:layout_constraintStart_toEndOf="@+id/seedImage"
             app:layout_constraintTop_toTopOf="@+id/seedImage" />
@@ -260,7 +260,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="#FFEB3B"
                 android:padding="15dp"
@@ -378,7 +378,8 @@
                 android:text="가나다라마바사"
                 app:layout_constraintBottom_toBottomOf="@+id/mypage_doingActivity"
                 app:layout_constraintStart_toEndOf="@+id/mypage_doingActivity"
-                app:layout_constraintTop_toTopOf="@+id/mypage_doingActivity" />
+                app:layout_constraintTop_toTopOf="@+id/mypage_doingActivity"
+                android:visibility="invisible"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
