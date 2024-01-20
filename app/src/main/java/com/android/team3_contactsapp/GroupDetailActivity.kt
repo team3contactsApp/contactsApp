@@ -95,18 +95,20 @@ class GroupDetailActivity : AppCompatActivity() {
 
         joinedMemberAdapter.itemClick = object : JoinedMemberAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
+                val bundle = Bundle()
 
                 val memberId = group!!.joinedMemberId[position]
                 val data = Data.member.find {
                     memberId == it.memberId
                 }
                 //Log.d("test", "onViewCreated data =  ${data}")
+                bundle.putParcelable("key", data)
+
                 val intent = Intent(this@GroupDetailActivity,ContactDetailActivity::class.java)
-                intent.putExtra("data",data)
+                intent.putExtra("data",bundle)
                 startActivity(intent)
             }
         }
-
     }
 
     private fun showJoinDialog() {
