@@ -1,44 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/dialog_cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="100dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_errorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mpdialog_errorName"
+            android:textColor="#FF0000"
+            android:visibility="invisible"/>
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="nickName" />
+            android:hint="nickName"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="PhoneNumber" />
+            android:hint="PhoneNumber"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editText3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="E-mail" />
+            android:hint="E-mail"
+            android:inputType="textPersonName" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_okay"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="@string/Okay"
-            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_okay"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="@string/Okay" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_cancle"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="취소" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
 </LinearLayout>
