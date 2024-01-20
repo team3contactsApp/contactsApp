@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -17,7 +18,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.ActivityContactDetailBinding
-
 
 class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
     private lateinit var binding: ActivityContactDetailBinding
@@ -39,6 +39,7 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
         binding.tvCtDetailName.text = member?.Name
         binding.ivCtDetailMyPicture.setImageResource(member?.MemberImg ?: 0)
         binding.tvCtDetailMobileNum.text = member?.myPhoneNumber
+        binding.tvCtDetailNatureNum.text = member?.actCnt.toString()
         binding.tvCtDetailNatureName.text = member?.title
         binding.tvCtDetailGroupNameGroup.text = "${member?.Name}님이 가입한 모임들"
 
@@ -62,6 +63,19 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
 
         binding. ctDetailClear.setOnClickListener {
             showUpdateDialog()
+        }
+
+        ctJoinedGroupAdapter.itemClick = object : MyContactsAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                val groupId = Data.member[0].joinedGroupId[position]
+                val data = Data.group.find {
+                    groupId == it.groupId
+                }
+                Log.d("test", "onViewCreated data =  ${data}")
+                val intent = Intent(this@ContactDetailActivity,GroupDetailActivity::class.java)
+                intent.putExtra("Minyong",data)
+                startActivity(intent)
+            }
         }
     }
 
@@ -104,11 +118,13 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                 val newName = nameEditText.text.toString()
                 val newPhoneNum = phoneNumEditText.text.toString()
 
-                if (isValidInput(newName, newPhoneNum)) {
+                val isNameValid = isValidName(newName)
+                val isPhoneNumValid = isValidPhoneNumber(newPhoneNum)
 
-                    member?.let {
-                        it.Name = newName
-                        it.myPhoneNumber = newPhoneNum
+                if (isNameValid && isPhoneNumValid) {
+                    member?.apply {
+                        Name = newName
+                        myPhoneNumber = newPhoneNum
                     }
 
                     binding.tvCtDetailName.text = newName
@@ -117,7 +133,17 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                     onUpdateInfo(newName, newPhoneNum)
                     dialog.dismiss()
                 } else {
-                    validationMessage.text = "잘못된 입력입니다."
+                    var validationError = ""
+
+                    if (!isNameValid) {
+                        validationError = "이름이 잘못되었습니다."
+                        nameEditText.requestFocus()
+                    } else if (!isPhoneNumValid) {
+                        validationError = "번호가 잘못되었습니다."
+                        phoneNumEditText.requestFocus()
+                    }
+
+                    validationMessage.text = validationError
                     validationMessage.visibility = View.VISIBLE
                 }
             }
@@ -132,10 +158,12 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
             val newPhoneNum = phoneNumEditText.text.toString()
 
             if (isValidInput(newName, newPhoneNum)) {
-
-                member?.let {
-                    it.Name = newName
-                    it.myPhoneNumber = newPhoneNum
+                //
+                Data.member.find {
+                    it.memberId == member?.memberId
+                }!!.let{ it2 ->
+                    it2.Name = newName
+                    it2.myPhoneNumber = newPhoneNum
                 }
 
                 binding.tvCtDetailName.text =newName
@@ -144,16 +172,22 @@ class ContactDetailActivity : AppCompatActivity(), UpdateInfoListener{
                 onUpdateInfo(newName, newPhoneNum)
                 alertDialog.dismiss()
             } else {
-                validationMessage.text = "잘못된 입력입니다."
-                validationMessage.visibility = View.VISIBLE
-                alertDialog.dismiss()
+                var validationError = ""
 
                 if (!isValidName(newName)) {
+                    validationError += "이름이 잘못되었습니다."
                     nameEditText.requestFocus()
-                } else if (!isValidPhoneNumber(newPhoneNum)) {
+                }
+
+                if (!isValidPhoneNumber(newPhoneNum)) {
+                    validationError += "번호가 잘못되었습니다."
                     phoneNumEditText.requestFocus()
-                } else {
-                    validationMessage.text = ""
+                }
+
+                validationMessage.text = validationError.trim()
+                validationMessage.visibility = View.VISIBLE
+
+                if (validationError.isEmpty()) {
                     validationMessage.visibility = View.GONE
                     alertDialog.dismiss()
                 }
