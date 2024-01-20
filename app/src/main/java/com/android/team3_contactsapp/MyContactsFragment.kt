@@ -1,20 +1,30 @@
 package com.android.team3_contactsapp
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.GestureDetector
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.team3_contactsapp.databinding.FragmentMyContactsBinding
 import com.google.android.material.snackbar.Snackbar
@@ -60,17 +70,25 @@ class MyContactsFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val myContactsAdapter = MyContactsAdapter(Data.member[0].friendsPhoneNumbersId)
+        val myContactAdapterGrid = MyContactsAdapter(Data.member[0].friendsPhoneNumbersId,Constants.GRID)
+        val myContactsAdapter = MyContactsAdapter(Data.member[0].friendsPhoneNumbersId,Constants.LIST)
         binding.rvMyContactsList.adapter = myContactsAdapter
         binding.rvMyContactsList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        //swipe
+        val itemTouchHelperCallback = context?.let { MyContactSwipeHelper(it) }
+        val helper = itemTouchHelperCallback?.let { ItemTouchHelper(it) }
+        if (helper != null) {
+            helper.attachToRecyclerView(binding.rvMyContactsList)
+        }
 
         myContactsAdapter.itemClick = object : MyContactsAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-
+                Log.d("test","온클릭 인터페이스 실행 확인 , ${position}")
                 val bundle = Bundle()
 
                 val id = Data.member[0].friendsPhoneNumbersId[position]
@@ -83,9 +101,36 @@ class MyContactsFragment : Fragment() {
 
                 if (data != null) {
                     listener?.onDataReceived(bundle)
+                    Log.d("test","listener = ${listener}")
+
                 }
             }
         }
+
+        myContactAdapterGrid.itemClick = object : MyContactsAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                Log.d("test","온클릭 인터페이스 실행 확인 , ${position}")
+                val bundle = Bundle()
+
+                val id = Data.member[0].friendsPhoneNumbersId[position]
+                val data = Data.member.find {
+                    id == it.memberId
+                }
+                //Log.d("test", "onViewCreated data =  ${data}")
+
+                bundle.putParcelable("key", data)
+
+                if (data != null) {
+                    listener?.onDataReceived(bundle)
+                    Log.d("test","listener = ${listener}")
+
+                }
+            }
+        }
+
+
+
+
 
         myContactsAdapter.itemLongClick = object : MyContactsAdapter.ItemLongClick {
             override fun onLongClick(view: View, position: Int) {
@@ -99,6 +144,27 @@ class MyContactsFragment : Fragment() {
                     Log.d("test", "롱클릭 멤버 =  ${member}")
                     Data.member[0].friendsPhoneNumbersId.removeAt(position)
                     myContactsAdapter.notifyItemRemoved(position)
+                    dialog.dismiss()
+                }
+                ad.setNegativeButton("취소"){ dialog,_ ->
+                    dialog.dismiss()
+                }
+                ad.show()
+            }
+        }
+
+        myContactAdapterGrid.itemLongClick = object : MyContactsAdapter.ItemLongClick {
+            override fun onLongClick(view: View, position: Int) {
+                val ad = androidx.appcompat.app.AlertDialog.Builder(context!!)
+                ad.setMessage("연락처를 삭제하시겠습니까?")
+                ad.setPositiveButton("확인") { dialog, _ ->
+                    val id = Data.member[0].friendsPhoneNumbersId[position]
+                    val member = Data.member.find {
+                        id == it.memberId
+                    }
+                    Log.d("test", "롱클릭 멤버 =  ${member}")
+                    Data.member[0].friendsPhoneNumbersId.removeAt(position)
+                    myContactAdapterGrid.notifyItemRemoved(position)
                     dialog.dismiss()
                 }
                 ad.setNegativeButton("취소"){ dialog,_ ->
@@ -157,10 +223,6 @@ class MyContactsFragment : Fragment() {
                 var closeDialog = false
                 //val alert = p0 as AlertDialog
 
-
-
-
-
                 if(name.text.isEmpty() || !isValidname(name.text.toString())){
                     validationMessage.text = "이름이 잘못되었습니다."
                     return@setOnClickListener
@@ -194,14 +256,36 @@ class MyContactsFragment : Fragment() {
 
                 }
 
-
-
                 if (closeDialog) { // [닫기]
                     alertDialog.dismiss()
                 }
-
             }
         }//
+
+        binding.icMycontactList.setOnClickListener {
+            binding.linearLayoutList.isGone = false
+
+        }
+
+        binding.tvGrid.setOnClickListener {
+            binding.rvMyContactsList.layoutManager = GridLayoutManager(context,3)
+            binding.rvMyContactsList.hasFixedSize()
+            binding.rvMyContactsList.adapter = myContactAdapterGrid
+            binding.linearLayoutList.isGone = true
+            binding.tvGrid.setTextColor(Color.parseColor("#0D4B34"))
+            binding.tvList.setTextColor(Color.parseColor("#777777"))
+        }
+
+        binding.tvList.setOnClickListener {
+            binding.rvMyContactsList.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            binding.rvMyContactsList.adapter = myContactsAdapter
+            binding.linearLayoutList.isGone = true
+            binding.tvGrid.setTextColor(Color.parseColor("#777777"))
+            binding.tvList.setTextColor(Color.parseColor("#0D4B34"))
+        }
+
+
     }
 
     override fun onStart() {
@@ -254,5 +338,4 @@ class MyContactsFragment : Fragment() {
             else -> return namePattern.matcher(email).matches()
         }
     }
-
 }
