@@ -43,4 +43,7 @@
     <string name="Mypage_phoneNumber">01012341234</string>
     <string name="Mypage_email">123@gmail.com</string>
     <string name="Mypage_name">사람이름1</string>
+    <string name="mpdialog_errorName">이름이 잘못 입력 되었습니다.</string>
+    <string name="mpdialog_errorPhoneNumber">번호는 숫자만 입력 가능합니다.</string>
+    <string name="mpdialog_errorEmail">이메일은 aaa@aaa.aaa로 입력해주세요</string>
 </resources>

@@ -114,6 +114,30 @@ class MypageFragment : Fragment() {
         //모임 그룹 개수에 따른 활동 횟수 증가
         binding.activityCount.text = "${initialItemCount}"
 
+        when (initialItemCount) {
+            in 0..5 -> {
+                binding.seedName.text = "씨앗 활동가"
+                binding.seedImage.setImageResource(R.drawable.seedimage)
+            }
+            in 6..15 -> {
+                binding.seedName.text = "새싹 활동가"
+                binding.seedImage.setImageResource(R.drawable.seedimage)
+            }
+            in 16..30 -> {
+                binding.seedName.text = "꽃 피우는 활동가"
+                binding.seedImage.setImageResource(R.drawable.seedimage)
+            }
+            in 31..50 -> {
+                binding.seedName.text = "열매 맺는 활동가"
+                binding.seedImage.setImageResource(R.drawable.seedimage)
+            }
+            in 51..100 -> {
+                binding.seedName.text = "나무 활동가"
+                binding.seedImage.setImageResource(R.drawable.seedimage)
+            }
+
+        }
+
         //수정 다이어로그 생성
         binding.mypageClear.setOnClickListener {
             val dialogFragment = MyDialogFragment(this)
