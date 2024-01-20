@@ -46,7 +46,7 @@
         android:id="@+id/middle"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="#2196F3"
+        android:background="@color/lightGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +76,7 @@
             android:id="@+id/mypage_profilebox"
             android:layout_width="222dp"
             android:layout_height="216dp"
-            android:background="@color/white"
+            android:background="@drawable/btn_info_modify"
             app:layout_constraintBottom_toBottomOf="@+id/mypage_cardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.483"
@@ -147,24 +147,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/seedImage"
-            android:layout_width="43dp"
-            android:layout_height="44dp"
-            android:src="@drawable/seedimage"
-            app:layout_constraintStart_toStartOf="@+id/mypage_cardView"
-            app:layout_constraintTop_toBottomOf="@+id/mypage_cardView" />
-
         <TextView
             android:id="@+id/seedName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:text="@string/seedName"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/seedImage"
-            app:layout_constraintStart_toEndOf="@+id/seedImage"
-            app:layout_constraintTop_toTopOf="@+id/seedImage" />
+            app:layout_constraintEnd_toEndOf="@+id/mypage_cardView"
+            app:layout_constraintStart_toStartOf="@+id/mypage_cardView"
+            app:layout_constraintTop_toBottomOf="@+id/mypage_cardView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -262,7 +255,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="#FFEB3B"
+                android:background="@color/lightGreen"
                 android:padding="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -359,6 +352,7 @@
                         android:id="@+id/btn_alram"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
                         android:text="알람 설정하기"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

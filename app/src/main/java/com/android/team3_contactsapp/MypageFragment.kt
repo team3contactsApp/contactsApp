@@ -33,7 +33,7 @@ class MypageFragment : Fragment() {
     private var _binding: FragmentMypageBinding? = null
     private val binding get() = _binding!!
     private val member = Data.member[0]
-    private val initialItemCount = Data.myJoinedgroup.size
+    private val initialItemCount = Data.member[0].actCnt
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -122,23 +122,18 @@ class MypageFragment : Fragment() {
         when (initialItemCount) {
             in 0..5 -> {
                 binding.seedName.text = "씨앗 활동가"
-                binding.seedImage.setImageResource(R.drawable.seedimage)
             }
             in 6..15 -> {
                 binding.seedName.text = "새싹 활동가"
-                binding.seedImage.setImageResource(R.drawable.seedimage)
             }
             in 16..30 -> {
                 binding.seedName.text = "꽃 피우는 활동가"
-                binding.seedImage.setImageResource(R.drawable.seedimage)
             }
             in 31..50 -> {
                 binding.seedName.text = "열매 맺는 활동가"
-                binding.seedImage.setImageResource(R.drawable.seedimage)
             }
             in 51..100 -> {
                 binding.seedName.text = "나무 활동가"
-                binding.seedImage.setImageResource(R.drawable.seedimage)
             }
 
         }
