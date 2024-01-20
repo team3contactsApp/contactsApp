@@ -44,6 +44,11 @@ class MypageFragment : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        binding.mypageRecyclerView.adapter?.notifyDataSetChanged()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

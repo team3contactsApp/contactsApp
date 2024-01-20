@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +22,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 interface FragmentDataListener {
-    fun onDataReceived(data: Member)
+    fun onDataReceived(data: Bundle)
 }
 
 class MyContactsFragment : Fragment() {
@@ -30,8 +31,7 @@ class MyContactsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var listener: FragmentDataListener? = null
-
-
+    private var param1: Member ?= null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -43,6 +43,13 @@ class MyContactsFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getBundle(ARG_PARAM1)?.getParcelable("key")
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,7 +58,6 @@ class MyContactsFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -59,16 +65,44 @@ class MyContactsFragment : Fragment() {
         binding.rvMyContactsList.adapter = myContactsAdapter
         binding.rvMyContactsList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
         myContactsAdapter.itemClick = object : MyContactsAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
+
+                val bundle = Bundle()
+
                 val id = Data.member[0].friendsPhoneNumbersId[position]
                 val data = Data.member.find {
                     id == it.memberId
                 }
-                Log.d("test", "onViewCreated data =  ${data}")
+                //Log.d("test", "onViewCreated data =  ${data}")
+
+                bundle.putParcelable("key", data)
+
                 if (data != null) {
-                    listener?.onDataReceived(data)
+                    listener?.onDataReceived(bundle)
                 }
+            }
+        }
+
+        myContactsAdapter.itemLongClick = object : MyContactsAdapter.ItemLongClick {
+            override fun onLongClick(view: View, position: Int) {
+                val ad = androidx.appcompat.app.AlertDialog.Builder(context!!)
+                ad.setMessage("연락처를 삭제하시겠습니까?")
+                ad.setPositiveButton("확인") { dialog, _ ->
+                    val id = Data.member[0].friendsPhoneNumbersId[position]
+                    val member = Data.member.find {
+                        id == it.memberId
+                    }
+                    Log.d("test", "롱클릭 멤버 =  ${member}")
+                    Data.member[0].friendsPhoneNumbersId.removeAt(position)
+                    myContactsAdapter.notifyItemRemoved(position)
+                    dialog.dismiss()
+                }
+                ad.setNegativeButton("취소"){ dialog,_ ->
+                    dialog.dismiss()
+                }
+                ad.show()
             }
         }
 
@@ -94,19 +128,19 @@ class MyContactsFragment : Fragment() {
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {p0 ->
                 var closeDialog = false
                 //val alert = p0 as AlertDialog
+                val validationMessage: TextView = view.findViewById(R.id.tvValidationMessage)
                 val name = view.findViewById<EditText>(R.id.et_dialog_name)
                 val phone = view.findViewById<EditText>(R.id.et_dialog_phone)
                 val email = view.findViewById<EditText>(R.id.et_dialog_email)
 
                 if(name.text.isEmpty() || !isValidname(name.text.toString())){
-                    Toast.makeText(context,"이름이 유효하지 않습니다.", Toast.LENGTH_SHORT).show()
-                    Log.d("test", "이름칸 ${name.text}")
+                    validationMessage.text = "이름이 잘못되었습니다."
                     return@setOnClickListener
                 } else if(phone.text.isEmpty() || !isValidPhoneNumber(phone.text.toString())){
-                    Toast.makeText(context, "번호가 유효하지 않습니다", Toast.LENGTH_SHORT).show()
+                    validationMessage.text ="번호가 잘못되었습니다"
                     return@setOnClickListener
                 } else if(!isValidEmail(email.text.toString())){
-                    Toast.makeText(context, "메일이 유효하지 않습니다.", Toast.LENGTH_SHORT).show()
+                    validationMessage.text = "메일이 잘못되었습니다."
                     return@setOnClickListener
                 }
 
@@ -127,7 +161,7 @@ class MyContactsFragment : Fragment() {
                             mutableListOf()
                         )
                     )
-                    Data.member[0].friendsPhoneNumbersId.add(id)
+                    param1!!.friendsPhoneNumbersId.add(id)
                     Log.d("test","추가됨 ${name.text}, ${email.text}, ${phone.text} .${Data.member[0].friendsPhoneNumbersId}")
 
                 }
@@ -149,12 +183,11 @@ class MyContactsFragment : Fragment() {
     }
 
     companion object {
-
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(data: Bundle) =
             MyContactsFragment().apply {
                 arguments = Bundle().apply {
-
+                    putBundle(ARG_PARAM1, data)
                 }
             }
 
