@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TableLayout
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -87,7 +88,8 @@ class GroupDetailActivity : AppCompatActivity() {
 
         val joinedMemberAdapter = JoinedMemberAdapter(group!!.joinedMemberId)
         binding.rvMemberList.adapter=joinedMemberAdapter
-        binding.rvMemberList.layoutManager = LinearLayoutManager(this,GridLayoutManager.HORIZONTAL,false)
+        binding.rvMemberList.layoutManager = GridLayoutManager(this,3)
+        binding.rvMemberList.setHasFixedSize(true)
 
         joinedMemberAdapter.itemClick = object : JoinedMemberAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {

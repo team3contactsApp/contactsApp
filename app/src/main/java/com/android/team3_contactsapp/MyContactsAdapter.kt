@@ -1,6 +1,9 @@
 package com.android.team3_contactsapp
 
 
+
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +22,12 @@ class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter
     interface ItemClick {
         fun onClick(view : View, position : Int)
     }
+    interface ItemLongClick {
+        fun onLongClick(view : View, position : Int)
+    }
+
     var itemClick : ItemClick? = null
+    var itemLongClick : ItemLongClick? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = RecyclerviewItemContactBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return Holder(binding)
@@ -39,6 +47,10 @@ class MyContactsAdapter (val mItems: MutableList<String>) : RecyclerView.Adapter
             holder.itemView.setOnClickListener {view ->
                 itemClick?.onClick(view,holder.adapterPosition)
                 //Log.d("test","11adapterposioin  ${holder.adapterPosition} ")
+            }
+            holder.itemView.setOnLongClickListener() OnLongClickListener@ {view ->
+                itemLongClick?.onLongClick(view, holder.adapterPosition)
+                return@OnLongClickListener true
             }
 
             if( Data.member[0].likeIdList.contains(it.memberId)){

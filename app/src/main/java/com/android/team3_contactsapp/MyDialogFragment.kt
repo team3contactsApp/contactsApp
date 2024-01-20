@@ -9,7 +9,7 @@ import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import com.android.team3_contactsapp.databinding.ClearDialogBinding
 
-class MyDialogFragment(private val mypageFragment: MypageFragment) : DialogFragment() {
+class MyDialogFragment(val mypageFragment: MypageFragment) : DialogFragment() {
 
     private var _binding: ClearDialogBinding? = null
     private val binding get() = _binding!!
@@ -35,6 +35,9 @@ class MyDialogFragment(private val mypageFragment: MypageFragment) : DialogFragm
                 edit2?.text.toString(),
                 edit3?.text.toString()
             )
+            val sendPhoneNumber = binding.editText
+            val sendEmail = binding.editText2
+
             dismiss()
         }
         return customView
@@ -44,4 +47,5 @@ class MyDialogFragment(private val mypageFragment: MypageFragment) : DialogFragm
         super.onDestroyView()
         _binding = null
     }
+
 }
