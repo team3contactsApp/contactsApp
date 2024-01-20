@@ -87,7 +87,10 @@ class GroupFragment : Fragment() {
             }
         }
     }
-
+    override fun onStart() {
+        super.onStart()
+        binding.rvMyGroupList.adapter?.notifyDataSetChanged()
+    }
     companion object {
 
         @JvmStatic
